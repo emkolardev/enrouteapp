@@ -1,0 +1,511 @@
+$bodypad: 0;
+$maxh: 100vh;
+$maxw: 100%;
+$bodybg: #333;
+$opacitybg: rgba(0,0,0,0.65);
+$lessopacity: rgba(0,0,0,0.8);
+$mapZ: 1;
+$menuIconZ: 900;
+$locIconZ: 901;
+$menuZ: 920;
+$footerZ: 950;
+$magnifyZ: 910;
+$btnbg: rgba(184,80,150,1);
+$btnhover: rgba(210,105,175,1);
+$searchbg: rgba(240,240,240,1);
+$standrad: 1px;
+$font: 'Roboto', 'Helvetica', sans-serif;
+$t: transparent;
+$standgreen: #28AF7D;
+$opacitygreen: rgba(68,188,139,0.7);
+$hovergreen: #44BC8B;
+//$standpink
+//$standblue
+
+@mixin applyKeyframes($name, $duration, $timing: ease-out, $delay: 0s, $iteration: 1, $direction: normal) {
+	animation-name: $name;
+    animation-duration: $duration;
+    animation-timing-function: $timing;
+    animation-delay: $delay;
+    animation-iteration-count: $iteration;
+    animation-direction: $direction;
+}
+
+@mixin gw($per) {
+	width: $per;
+	max-width: $per;
+}
+
+@mixin grow($start, $end) {
+	0%
+	{ height: $start; }
+	100%
+	{ height: $end; }
+}
+
+// button component
+.button {
+	border: none;
+	box-shadow: none;
+	background-color: $btnbg;
+	color: white;
+	padding: 10px 15px;
+	letter-spacing: 0.02em;
+	-webkit-appearance: none;
+	outline: none;
+	border-radius: $standrad;
+	font-family: $font;
+	// button hover	
+	.buttonStyles {	
+		&:hover {
+			@include applyKeyframes(buttonFade, 0.5s);
+			background-color: $btnhover;
+		} // end hover
+	}
+	// wide buttons
+	.wide {
+		width: $maxw;
+		max-width: $maxw;
+	} // end wide
+} // end button
+
+// restrict page elements
+.container {
+	height: 100%;
+	max-width: $maxw;
+	padding: $bodypad;
+	background-color: $bodybg;
+	position: relative;
+	overflow: hidden;
+} // end container
+
+// the map!
+ .gMap {
+	width: $maxw;
+	max-width: $maxw;
+	height: $maxh;
+	max-height: $maxh;
+	z-index: $mapZ;
+} // end map
+
+.grid {
+	
+	box-sizing: border-box;
+	padding: 10px;
+	
+	.g {
+		max-width: $maxw;
+	}
+	
+	.g10 {
+		@include gw(10%);
+	}
+	
+	.g15 {
+		@include gw(15%);
+	}
+	
+	.g20 {
+		@include gw(20%);
+	}
+	
+	.g25 {
+		@include gw(25%);
+	}
+	
+	.g30 {
+		@include gw(30%);
+	}
+	
+	.g35 {
+		@include gw(35%);
+	}
+	
+	.g40 {
+		@include gw(40%);
+	}
+	
+	.g45 {
+		@include gw(45%);
+	}
+	
+	.g50 {
+		@include gw(50%);
+	}
+	
+	.g55 {
+		@include gw(55%);
+	}
+	
+	.g60 {
+		@include gw(60%);
+	}
+	
+	.g65 {
+		@include gw(65%);
+	}
+	
+	.g70 {
+		@include gw(70%);
+	}
+
+	.g75 {
+		@include gw(75%);
+	}
+	
+	.g80 {
+		@include gw(80%);
+	}
+	
+	.g85 {
+		@include gw(85%);
+	}
+	
+	.g90 {
+		@include gw(90%);
+	}
+	
+	.g95 {
+		@include gw(95%);
+	}
+	
+	.g100 {
+		@include gw(100%);
+	}
+
+}
+
+// icons
+.icon {
+	background-repeat: no-repeat;
+	background-position: center;
+	border-radius: 2px;
+	display: block;
+	&:hover {
+		background-color: $t;
+	}
+	// menu icon
+	&.menu {
+		height: 37px;
+		width: 35px;
+		padding: 0;
+		background-image: url('../images/menu-icon-30x35.png');
+		background-size: 20px 25px;
+		background-color: $opacitybg;
+		margin: 10px 5px;
+		position: absolute;
+		top: -5px;
+		z-index: $menuIconZ;
+	}// end menu icon
+	// location icon
+	&.loc {
+		width: 20px;
+		height: 20px;
+		background-image: url('../images/location.png');
+		background-size: 20px 20px;
+		position: absolute;
+		background-color: $t;
+		margin-left: calc(100% - 30px);
+		cursor: pointer;
+		top: 15px;
+		z-index: $locIconZ;
+		// location clicked animation
+		&.find {
+			@include applyKeyframes(spin, 1s, $timing: ease-out, $iteration: infinite);
+		} // end loc animation
+	} // end location icon
+	// direction icon
+	&.direction {
+		height: 80px;
+		border-radius: $standrad;
+		background-color: $t;
+		background-image: url('../images/arrow-white-r.png');
+		background-size: 20px 20px;
+		visibility: hidden;
+		&.show {
+			//visibility: visible;
+		}
+	} // end direction icon
+	// car icon
+	&.car {
+		height: 80px;
+		background-color: $standgreen;
+		border-radius: $standrad + 1px;
+		background-image: url('../images/get.png');
+		background-size: 40px 40px;
+		cursor: pointer;
+		text-align: center;
+		@include applyKeyframes(greenFade, 0.5s, $delay: 1s, $iteration: 6, $direction: alternate);
+		&:hover {
+			@include applyKeyframes(greenFade, 0.4s);
+			background-color: $hovergreen;
+		}
+		&.docked {
+			@include applyKeyframes(floatIcon, 0.4s);
+			height: 20px;
+			width: 20px;
+			margin-top: -30px;
+			background-size: 20px 20px;
+			border-radius: 50%;
+			opacity: 0.8;
+		}
+	} // end car icon
+	// waypoint dock start icon
+	&.start {
+		display: none;
+		// dock expanded (start)
+		&.expanded {
+			width: 20px;
+			height: 20px;
+			background-image: url('../images/current.png');
+			background-size: 20px 20px;
+			margin-top: 10px;
+			margin-left: 10px;
+			display: block;
+			position: absolute;
+		} // end dock expanded (start)
+	} //end dock start icon
+	// dock waypoint path icon
+	&.path {
+		width: 0;
+		height: 1px;
+		background-color: rgba(255,255,255,0.6);
+		display: none;
+		&.expanded {
+			@include applyKeyframes(fadein, 0.5s, $timing: ease-in);
+			display: block;
+			width: 70%;
+			float: left;
+			margin-left: 15%;
+			margin-top: 20px;
+		}
+	}// end path icon
+} // end icons
+
+// places searchbox
+.searchBox {
+	border-radius: 2px;
+	border: none;
+	box-shadow: none;
+	outline: none;
+	height: 35px;
+	width: calc(100% - 85px);
+	margin-left: 15px;
+	padding-left: 10px;
+	margin-top: 5px;
+	background-color: $searchbg;
+	font-size: 14px;
+}
+
+.footer {
+	position: fixed;
+	bottom: 0;
+	height: 100px;
+	width: $maxw;
+	background-color: $lessopacity;
+	z-index: $footerZ;
+	color: rgba(255,255,255,1);
+	left: 0;
+	font-family: 'Roboto', sans-serif;
+	//display: none;
+	
+	&.expanded {
+		height: 130px;
+		@include applyKeyframes(growFooter, 0.3s);
+	}
+	
+	.directionBar {
+		width: $maxw;
+		height: 100px;
+	}
+	
+	.waypointIcons {
+		width: $maxw;
+		
+		&.expanded {
+			height: 30px;
+			@include applyKeyframes(growDock, 0.3s);
+		}
+
+	}
+	
+	.instructions {
+		padding: 0;
+		margin: 10px 20%;
+		position: absolute;
+		line-height: 1.4;
+		vertical-align: middle;
+	}
+	
+}
+
+.floats {
+	&.r {
+		float: right;
+	}
+	&.l {
+		float: left;
+	}
+}
+
+@-moz-keyframes fadein {
+	0%
+	{ display: none; width: 0; }
+	100%
+	{ display: block; width: 70%; }
+}
+
+@-webkit-keyframes fadein {
+	0%
+	{ display: none; width: 0; }
+	100%
+	{ display: block; width: 70%; }
+}
+
+@keyframes fadein {
+	0%
+	{ display: none; width: 0; }
+	100%
+	{ display: block; width: 70%; }
+}
+
+@-moz-keyframes floatIcon {
+	0%
+	{ height: 80px; width: 20%; margin-top: 0px; background-size: 40px 40px; }
+	100%
+	{ height: 20px; width: 20px; margin-top: -30px; background-size: 20px 20px; }
+}
+
+@-webkit-keyframes floatIcon {
+	0%
+	{ height: 80px; width: 20%; margin-top: 0px; background-size: 40px 40px; }
+	100%
+	{ height: 20px; width: 20px; margin-top: -30px; background-size: 20px 20px; }
+}
+
+@keyframes floatIcon {
+	0%
+	{ height: 80px; width: 20%; margin-top: 0px; background-size: 40px 40px; }
+	100%
+	{ height: 20px; width: 20px; margin-top: -30px; background-size: 20px 20px; }
+}
+
+@-moz-keyframes buttonFade {
+	0%
+	{ background-color: $btnbg; }
+	100%
+	{ background-color: $btnhover; }
+}
+
+@-webkit-keyframes buttonFade {
+	0%
+	{ background-color: $btnbg; }
+	100%
+	{ background-color: $btnhover; }
+}
+
+@keyframes buttonFade {
+	0%
+	{ background-color: $btnbg; }
+	100%
+	{ background-color: $btnhover; }
+}
+
+@-moz-keyframes greenFade {
+	0%
+	{ background-color: $standgreen; }
+	100%
+	{ background-color: $hovergreen; }
+}
+
+@-webkit-keyframes greenFade {
+	0%
+	{ background-color: $standgreen; }
+	100%
+	{ background-color: $hovergreen; }
+}
+
+@keyframes greenFade {
+	0%
+	{ background-color: $standgreen; }
+	100%
+	{ background-color: $hovergreen; }
+}
+
+@-moz-keyframes slideMenu {
+	0%
+	{ display: none; background-color: transparent; }
+	100%
+	{ display: block; background-color: $opacitybg; }
+}
+
+@-webkit-keyframes slideMenu {
+	0%
+	{ display: none; background-color: transparent; }
+	100%
+	{ display: block; background-color: $opacitybg; }
+}
+
+@keyframes slideMenu {
+	0%
+	{ display: none; background-color: transparent; }
+	100%
+	{ display: block; background-color: $opacitybg; }
+}
+
+@-moz-keyframes spin {
+	100%
+	{ -moz-transform: rotate(360deg); }	
+}
+
+@-webkit-keyframes spin {
+	100%
+	{ -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+	100%
+	{ transform: rotate(360deg); }
+}
+
+@-moz-keyframes growDock {
+	0%
+	{ height: 0px; }
+	100%
+	{ height: 30px; }
+}
+
+@-webkit-keyframes growDock {
+	0%
+	{ height: 0px; }
+	100%
+	{ height: 30px; }
+}
+
+@keyframes growDock {
+	0%
+	{ height: 0px; }
+	100%
+	{ height: 30px; }
+}
+
+@-moz-keyframes growFooter {
+	0%
+	{ height: 100px; }
+	100%
+	{ height: 130px; }
+}
+
+@-webkit-keyframes growFooter {
+	0%
+	{ height: 100px; }
+	100%
+	{ height: 130px; }
+}
+
+@keyframes growFooter {
+	0%
+	{ height: 100px; }
+	100%
+	{ height: 130px; }
+}

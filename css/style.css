@@ -1,0 +1,243 @@
+.button {
+  border: none;
+  box-shadow: none;
+  background-color: #b85096;
+  color: white;
+  padding: 10px 15px;
+  letter-spacing: 0.02em;
+  -webkit-appearance: none;
+  outline: none;
+  border-radius: 1px;
+  font-family: 'Roboto', sans-serif; }
+  .button:hover {
+    animation-name: buttonFade;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-out;
+    animation-delay: 0s;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    background-color: #d269af; }
+  .button .wide {
+    width: 100%; }
+
+.container {
+  height: 100%;
+  max-width: 100%;
+  padding: 5px;
+  background-color: #333;
+  position: relative;
+  overflow: hidden; }
+
+.gMap {
+  width: 100%;
+  max-width: 100%;
+  height: calc(100vh - 10px);
+  max-height: calc(100vh - 10px);
+  z-index: 1; }
+
+.icon {
+  display: block;
+  background-repeat: no-repeat;
+  background-position: center; }
+
+.header {
+  width: calc(100% - 10px);
+  max-width: 100%;
+  height: 60px;
+  margin: 0 auto;
+  background-color: rgba(0, 0, 0, 0.75);
+  z-index: 900;
+  position: absolute;
+  top: 0; }
+  .header .menuIcon {
+    height: 40px;
+    width: 30px;
+    padding: 0;
+    background-image: url("../images/menu-icon-30x35.png");
+    background-size: 30px 40px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+    margin: 10px 5px; }
+    .header .menuIcon:hover {
+      animation-name: none;
+      animation-duration: 0s;
+      animation-timing-function: ease-out;
+      animation-delay: 0s;
+      animation-iteration-count: 1;
+      animation-direction: normal;
+      background-color: transparent; }
+  .header .searchIcon {
+    width: 20px;
+    height: 32px;
+    background-image: url("../images/search.png");
+    background-size: 20px 20px;
+    position: absolute;
+    top: 0;
+    z-index: 910; }
+  .header .getLocIcon {
+    width: 20px;
+    height: 20px;
+    background-image: url("../images/location.png");
+    background-size: 20px 20px;
+    position: absolute;
+    margin-left: calc(100% - 72px);
+    margin-top: -25px;
+    cursor: pointer; }
+    .header .getLocIcon.find {
+      animation-name: spin;
+      animation-duration: 1s;
+      animation-timing-function: ease-in;
+      animation-delay: 0s;
+      animation-iteration-count: 1;
+      animation-direction: normal; }
+
+/*
+.searchForm {
+	margin: -45px 0 0 45px;
+	width: 80%;
+	max-width: 80%;
+}
+*/
+.searchBox {
+  border-radius: 2px;
+  border: none;
+  box-shadow: none;
+  outline: none;
+  height: 40px;
+  width: calc(100% - 110px);
+  padding-left: 30px; }
+
+.sideMenu {
+  width: 60%;
+  max-width: 400px;
+  height: 400px;
+  background-color: transparent;
+  position: absolute;
+  top: 60px;
+  border-bottom-right-radius: 3px;
+  display: none;
+  z-index: 920; }
+  .sideMenu.open {
+    animation-name: slideMenu;
+    animation-duration: 0.1s;
+    animation-timing-function: ease-out;
+    animation-delay: 0s;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    background-color: rgba(0, 0, 0, 0.75);
+    display: block; }
+
+.optionToggle {
+  width: 25px;
+  height: 25px;
+  margin-top: 5px;
+  margin-left: calc(100% - 40px);
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  background-position: center; }
+
+.goNight {
+  background-image: url("../images/moon.png");
+  background-size: 20px 17px; }
+
+.goDay {
+  background-image: url("../images/sun.png"); }
+
+.userIcon {
+  width: 25px;
+  height: 25px;
+  margin-top: 5px;
+  margin-lefT: 10px;
+  background-size: 15px 20px;
+  background-color: white;
+  position: absolute; }
+
+.footer {
+  position: fixed;
+  bottom: 5px;
+  height: 100px;
+  width: calc(100% - 10px);
+  margin-left: 5px;
+  background-color: rgba(225, 225, 225, 0.9);
+  z-index: 950;
+  left: 0;
+  font-family: 'Roboto', sans-serif;
+  display: none; }
+  .footer .instructions {
+    padding: 0;
+    margin-top: -80px;
+    margin-left: calc(15% + 15px); }
+
+.directionIcon {
+  width: 50px;
+  height: 80px;
+  margin-left: 5px;
+  margin-top: 10px;
+  border-radius: 1px;
+  background-color: tomato; }
+
+.carIcon {
+  width: 50px;
+  height: 80px;
+  background-color: tomato;
+  margin-left: calc(80% - 5px);
+  margin-top: -35px;
+  border-radius: 1px; }
+
+.grid15 {
+  width: 15%; }
+
+.grid20 {
+  width: 20%; }
+
+.grid60 {
+  width: 60%; }
+
+@-moz-keyframes buttonFade {
+  0% {
+    background-color: #b85096; }
+  100% {
+    background-color: #d269af; } }
+@-webkit-keyframes buttonFade {
+  0% {
+    background-color: #b85096; }
+  100% {
+    background-color: #d269af; } }
+@keyframes buttonFade {
+  0% {
+    background-color: #b85096; }
+  100% {
+    background-color: #d269af; } }
+@-moz-keyframes slideMenu {
+  0% {
+    display: none;
+    background-color: transparent; }
+  100% {
+    display: block;
+    background-color: rgba(0, 0, 0, 0.75); } }
+@-webkit-keyframes slideMenu {
+  0% {
+    display: none;
+    background-color: transparent; }
+  100% {
+    display: block;
+    background-color: rgba(0, 0, 0, 0.75); } }
+@keyframes slideMenu {
+  0% {
+    display: none;
+    background-color: transparent; }
+  100% {
+    display: block;
+    background-color: rgba(0, 0, 0, 0.75); } }
+@-moz-keyframes spin {
+  100% {
+    -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg); } }
+@keyframes spin {
+  100% {
+    transform: rotate(360deg); } }
+
+/*# sourceMappingURL=style.css.map */

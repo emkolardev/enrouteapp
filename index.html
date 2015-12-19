@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Find EnRoute</title>
+	<meta name="author" content="Emily Kolar">
+	<link rel="stylesheet" href="css/vendor/normalize.css" title="normalize" type="text/css" media="screen" charset="utf-8">
+	<link rel="stylesheet" href="css/vendor/base.css" title="base styles" type="text/css" media="screen" charset="utf-8">
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="css/stylesheet.css" type="text/css" media="screen" charset="utf-8">
+</head>
+<body>
+	<div class="container" id="page-container">
+		<div class="gMap" id="map">
+		</div>
+		<button type="button" class="button icon menu" id="menu-icon"></button>
+		<input type="text" class="searchBox" id="search-box" placeholder="Where to?" />
+		<button type="button" class="button icon loc" id="loc-icon"></button>
+<!--
+		<div class="sideMenu" id="side-menu">
+			<span class="icon userIcon"></span>
+			<button type="button" class="button optionToggle goNight" id="style-button"></button>
+		</div>
+-->
+		<div class="footer" id="footer-bar">
+			<div class="waypointIcons" id="waypoint-dock">
+				<span class="icon start" id="dock-start"></span>
+				<span class="icon path" id="path-icon"></span>
+			</div>
+			<div class="directionBar grid" id="direction-bar">
+				<span class="g15 icon direction floats l" id="direction-icon"></span>
+				<p class="instructions g60" id="instruct">Get Directions To:<br />123 Address Lane<br />Chicago, IL 60657</p>
+				<span class="g20 icon car floats r" id="get-directions"></span>
+			</div>
+		</div>
+	</div>
+	<script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkTGzpRAJK24gDluEDfL_WFOOEC6r8xjY&libraries=places&callback=initMap">
+    </script>
+    <script src="js/UIscript.js"></script>
+    <script src="js/mapstyles.js"></script>
+	<script src="js/scripts.js"></script>
+</body>
+</html>
