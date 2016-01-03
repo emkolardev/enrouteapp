@@ -5,7 +5,7 @@ var sideMenu;
 var toggleMapStyle;
 var searchBox;
 var searchForm;
-var getDirect;
+var getNext;
 var footer;
 var waypointDock;
 var dockStart; 
@@ -13,6 +13,9 @@ var instruct;
 var waypointPath;
 var waypointIcons;
 var directIcon;
+var finalDestIcon;
+var onRoute;
+var startNav; 
 
 (function() {
 	'use strict';
@@ -24,14 +27,16 @@ var directIcon;
 	//styleBtn = document.getElementById('style-button');
 	searchBox = document.getElementById('search-box');
 	searchForm = document.getElementById('search-form');
-	getDirect = document.getElementById('get-directions');
+	getNext = document.getElementById('get-next');
 	footer = document.getElementById('footer-bar');
 	waypointDock = document.getElementById('waypoint-dock');
 	dockStart = document.getElementById('dock-start');
 	instruct = document.getElementById('instruct');
 	waypointPath = document.getElementById('path-icon');
 	directIcon = document.getElementById('direction-icon');
+	finalDestIcon = document.getElementById('destination-icon');
 	waypointIcons = [];
+	onRoute = false;
 	
 	// add event listeners
 	locIcon.addEventListener('click', function() {
@@ -45,18 +50,32 @@ var directIcon;
 		sideMenu.classList.toggle('open');
 	});
 	
-	getDirect.addEventListener('click', function() {
-		geocodeLatLng(geocoder, map, infoWindow, true);
-		setTimeout(function() {
-			footer.classList.add('expanded');
-			waypointDock.classList.add('expanded');
-			getDirect.classList.add('docked');
-			dockStart.classList.add('expanded');
-			waypointPath.classList.add('expanded');
-			searchBox.placeholder = "Find near route...";
-			directIcon.classList.add('show');
-			showInstruct();
-		}, 1200);
+	getNext.addEventListener('click', function() {
+		if (onRoute) 
+		{
+			getNext.classList.add('retrieving');
+			setTimeout(function() {
+				getNext.classList.remove('retrieving');
+			}, 300);
+			showNextDirection();
+		}
+		if (!onRoute) 
+		{
+			geocodeLatLng(geocoder, map, infoWindow, true);
+			setTimeout(function() {
+				footer.classList.add('expanded');
+				waypointDock.classList.add('expanded');
+				getNext.classList.add('docked');
+				dockStart.classList.add('expanded');
+				waypointPath.classList.add('expanded');
+				searchBox.placeholder = "Find near route...";
+				directIcon.classList.add('show');
+				finalDestIcon.classList.add('docked');
+				showInstruct();
+			}, 1200);
+			onRoute = true;
+		}
+		
 	});
 	
 	
@@ -79,5 +98,18 @@ var directIcon;
 
 
 function showInstruct() {
-	instruct.innerHTML = '<button type="button" class="button icon startNav">Start Navigation</button>';
+	instruct.innerHTML = '<button type="button" class="button icon startNav" id="start-nav">Start Navigation</button>';
+	startNav = document.getElementById('start-nav');
+	startNav.addEventListener('click', function() {
+		getNext.classList.remove('g20');
+		getNext.classList.add('g10');
+		getNext.classList.remove('docked');
+		getNext.classList.add('growIt');
+		setTimeout(function() {
+			getNext.classList.add('next');
+			getNext.classList.remove('growIt');
+		}, 500);
+		startNav.classList.add('started');
+		showNextDirection();
+	});
 }

@@ -26,18 +26,19 @@
 			<button type="button" class="button optionToggle goNight" id="style-button"></button>
 		</div>
 -->
-		<div class="footer" id="footer-bar">
+		<div class="footer hidden" id="footer-bar">
 			<div class="waypointIcons dropzone" id="waypoint-dock">
 				<span class="waypointGrid" id="waypoint-grid"></span>
 
 				<span class="icon start" id="dock-start"></span>
 				<span class="icon path" id="path-icon"></span>
+				<span class="icon finalDestination floats r" id="destination-icon"></span>
 
 			</div>
 			<div class="directionBar grid" id="direction-bar">
-				<span class="g15 icon direction floats l" id="direction-icon"></span>
+				<span class="g10 icon direction floats l" id="direction-icon"></span>
 				<p class="instructions g60" id="instruct">Get Directions To:<br />123 Address Lane<br />Chicago, IL 60657</p>
-				<span class="g20 icon car floats r" id="get-directions"></span>
+				<span class="g20 icon getNext floats r" id="get-next"></span>
 			</div>
 		</div>
 	</div>
@@ -47,31 +48,14 @@
     <script src="js/UIscript.js"></script>
     <script src="js/mapstyles.js"></script>
 	<script src="js/scripts.js"></script>
-	<!--<script>
-	var prevContainer, thisContainer, prevPoint, thisPoint;
-function allowDrop(ev) {
-    ev.preventDefault();
-}
-
-function drag(ev) {
-    ev.dataTransfer.setData("image", ev.target.id);
-}
-
-function drop(ev) {
-    ev.preventDefault();
-    var data = ev.dataTransfer.getData("image");
-    ev.target.appendChild(document.getElementById(data));
-}
-</script>-->
-
-<script>
+	<script>
 	// target elements with the "draggable" class
 	interact('.draggable').draggable({
-		// enable inertial throwing
+	// enable inertial throwing
 		inertia: true,
 		// keep the element within the area of it's parent
 		restrict: {
- 			restriction: '#waypoint-grid',
+			restriction: '#waypoint-grid',
 			endOnly: true,
 			elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
 		},
@@ -82,9 +66,9 @@ function drop(ev) {
 		onmove: dragMoveListener,
 		// call this function on every dragend event
 		/*
-onend: function (event) {
+		onend: function (event) {
 		};
-*/
+		*/
 	});
 	
 	function dragMoveListener (event) {
@@ -101,12 +85,11 @@ onend: function (event) {
 		// update the posiion attributes
 		target.setAttribute('data-x', x);
 		target.setAttribute('data-y', y);
-		
+	
 	};
 	
 	// this is used later in the resizing and gesture demos
 	window.dragMoveListener = dragMoveListener;
-	
 	
 	/* The dragging code for '.draggable' from the demo above
 	* applies to this demo as well so it doesn't have to be repeated. */
@@ -145,8 +128,7 @@ onend: function (event) {
 			event.target.classList.remove('drop-active');
 			event.target.classList.remove('drop-target');
 		}
-	});
-	
-</script>
+	});	
+	</script>
 </body>
 </html>

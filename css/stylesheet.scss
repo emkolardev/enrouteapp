@@ -228,7 +228,7 @@ $codablue: rgba(35,155,212,1);
 		}
 	} // end direction icon
 	// car icon
-	&.car {
+	&.getNext {
 		height: 80px;
 		background-color: $standgreen;
 		border-radius: $standrad + 1px;
@@ -242,6 +242,21 @@ $codablue: rgba(35,155,212,1);
 			background-color: $hovergreen;
 		}
 		&.docked {
+			display: none;
+		}
+		&.next {
+			background-image: url('../images/next-arrow.png');
+			background-size: 20px 20px;
+		}
+		&.growIt {
+			@include applyKeyframes(growGeneric, 0.2s);
+			background-image: url('../images/next-arrow.png');
+		}
+		&.retrieving {
+			@include applyKeyframes(growGeneric, 0.1s);
+		}
+		/*
+&.docked {
 			//@include applyKeyframes(floatIcon, 0.4s);
 			height: 20px;
 			width: 20px;
@@ -250,7 +265,24 @@ $codablue: rgba(35,155,212,1);
 			border-radius: 50%;
 			background-color: $standgreen;
 		}
+*/
 	} // end car icon
+	//destination icon
+	&.finalDestination {
+		height: 20px;
+		width: 20px;
+		background-size: 20px 20px;
+		margin-top: 10px;
+		margin-right: 10px; 
+		border-radius: 50%;
+		background-color: $standgreen;
+		background-image: url('../images/get.png');
+		cursor: pointer;
+		display: none;
+		&.docked {
+			display: block;
+		}
+	} // end destination icon
 	// waypoint dock start icon
 	&.start {
 		display: none;
@@ -318,6 +350,12 @@ $codablue: rgba(35,155,212,1);
 	position: absolute;
 } // end drop zones
 
+.startNav {
+	&.started {
+		display: none;
+	}
+}
+
 // places searchbox
 .searchBox {
 	border-radius: 2px;
@@ -350,6 +388,10 @@ $codablue: rgba(35,155,212,1);
 		@include applyKeyframes(growFooter, 0.3s);
 	}
 	
+	&.hidden {
+		display: none;
+	}
+	
 	.directionBar {
 		width: $maxw;
 		height: 100px;
@@ -369,9 +411,9 @@ $codablue: rgba(35,155,212,1);
 	
 	.instructions {
 		padding: 0;
-		margin: 10px 20%;
+		margin: 0 20%;
 		position: absolute;
-		line-height: 1.4;
+		line-height: 1.5;
 		vertical-align: middle;
 	}
 	
@@ -384,6 +426,58 @@ $codablue: rgba(35,155,212,1);
 	&.l {
 		float: left;
 	}
+}
+
+.spinner {
+  margin: 0;
+  width: 35px;
+  text-align: center;
+}
+
+.spinner > div {
+  width: 10px;
+  height: 10px;
+  background-color: #FFF;
+
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+}
+
+.spinner .bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+
+.spinner .bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+
+.growIt {
+	display: block;
+	@include applyKeyframes(growGeneric, 0.2s);
+}
+
+.retrieving {
+	background-color: blue;
+	@include applyKeyframes(retrieving, 0.2s, $delay: 0.1s);
+}
+
+@-webkit-keyframes sk-bouncedelay {
+  0%, 80%, 100% { -webkit-transform: scale(0) }
+  40% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bouncedelay {
+  0%, 80%, 100% { 
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  } 40% { 
+    -webkit-transform: scale(1.0);
+    transform: scale(1.0);
+  }
 }
 
 @-moz-keyframes fadein {
@@ -400,6 +494,53 @@ $codablue: rgba(35,155,212,1);
 	{ display: block; width: 70%; }
 }
 
+@-webkit-keyframes growGeneric {
+	0%
+	{ -webkit-transform: scale(0); transform: scale(0); }
+	100%
+	{ -webkit-transform: scale(1.0); transform: scale(1.0); }
+}
+
+@keyframes growGeneric {
+	0%
+	{ -webkit-transform: scale(0); transform: scale(0); }
+	100%
+	{ -webkit-transform: scale(1.0); transform: scale(1.0); }
+}
+
+@-webkit-keyframes shrinkGeneric {
+	0%
+	{ -webkit-transform: scale(1.0); transform: scale(1.0); }
+	100%
+	{ -webkit-transform: scale(0); transform: scale(0); }
+}
+
+@keyframes shrinkGeneric {
+	0%
+	{ -webkit-transform: scale(1.0); transform: scale(1.0); }
+	100%
+	{ -webkit-transform: scale(0); transform: scale(0); }
+}
+
+
+@-webkit-keyframes retrieving {
+	0%
+	{ -webkit-transform: rotate(0deg); }
+	50%
+	{ -webkit-transform: rotate(180deg); }
+	100%
+	{ -webkit-transform: rotate(360deg); }
+}
+
+@keyframes retrieving {
+	0%
+	{ -webkit-transform: rotate(0deg); transform: rotate(0deg); }
+	50%
+	{ -webkit-transform: rotate(180deg); transform: rotate(180deg); }
+	100%
+	{ -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+}
+
 @keyframes fadein {
 	0%
 	{ display: none; width: 0; }
@@ -411,21 +552,21 @@ $codablue: rgba(35,155,212,1);
 	0%
 	{ height: 80px; width: 20%; margin-top: 0px; background-size: 40px 40px; background-color: $standgreen; }
 	100%
-	{ height: 20px; width: 20px; margin-top: -30px; background-size: 20px 20px; background-color: $standblue; }
+	{ height: 20px; width: 20px; margin-top: -30px; background-size: 20px 20px; background-color: $standgreen; }
 }
 
 @-webkit-keyframes floatIcon {
 	0%
 	{ height: 80px; width: 20%; margin-top: 0px; background-size: 40px 40px; background-color: $standgreen; }
 	100%
-	{ height: 20px; width: 20px; margin-top: -30px; background-size: 20px 20px; background-color: $standblue; }
+	{ height: 20px; width: 20px; margin-top: -30px; background-size: 20px 20px; background-color: $standgreen; }
 }
 
 @keyframes floatIcon {
 	0%
 	{ height: 80px; width: 20%; margin-top: 0px; background-size: 40px 40px; background-color: $standgreen; }
 	100%
-	{ height: 20px; width: 20px; margin-top: -30px; background-size: 20px 20px; background-color: $standblue; }
+	{ height: 20px; width: 20px; margin-top: -30px; background-size: 20px 20px; background-color: $standgreen; }
 }
 
 @-moz-keyframes buttonFade {
