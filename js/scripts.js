@@ -1,4 +1,4 @@
-// for maps
+var onRoute;
 var map;
 var marker;
 var markers;
@@ -16,6 +16,8 @@ var directionsDisplay;
 var directionsService;
 var placeService;
 var geocoder;
+var waypoints;
+var dockSpots;
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // google maps api callback - do all the things!
@@ -32,6 +34,8 @@ function initMap() {
 	darkMapTypeId = 'darkstyle';
 	polyColor = '#B85096';
 	polyStroke = 3;
+	waypoints = [];
+	dockSpots = [];
 	
 	// set a default center: chicago; zoomed out to general midwest
 	defaultCenter = new google.maps.LatLng({lat: 41.8369, lng: -87.6847});
@@ -74,60 +78,7 @@ function initMap() {
 	placeService = new google.maps.places.PlacesService(map);
 	
 	// get a places searchbox going
-	var input = document.getElementById('search-box');
-	var placesBox = new google.maps.places.SearchBox(input);
-	map.controls[google.maps.ControlPosition.TOP].push(input);
-	
-	map.addListener('bounds_changed', function() {
-    	placesBox.setBounds(map.getBounds());
-  	});
-
-  	// init markers array
-  	markers = [];
-  	
-  	// Listen for the event fired when the user selects a prediction and retrieve
-  	// more details for that place.
-  	placesBox.addListener('places_changed', function() {
-    	var places = placesBox.getPlaces();
-		if (places.length == 0) {
-			return;
-    	}
-
-		// clear out old markers
-	    markers.forEach(function(marker) {
-	      marker.setMap(null);
-	    });
-		
-		markers = [];
-
-		// for each place, get the icon, name and location
-		var bounds = new google.maps.LatLngBounds();
-		
-		places.forEach(function(place) {
-			var icon = {
-		        url: place.icon,
-		        size: new google.maps.Size(71, 71),
-		        origin: new google.maps.Point(0, 0),
-		        anchor: new google.maps.Point(17, 34),
-		        scaledSize: new google.maps.Size(25, 25) 
-		    };
-			// create a marker for each place
-			markers.push(new google.maps.Marker({
-		        map: map,
-		        icon: pinkIcon,
-		        title: place.name,
-		        position: place.geometry.location
-	      	}));
-		    if (place.geometry.viewport) {
-	        	// only geocodes have viewport
-	        	bounds.union(place.geometry.viewport);
-	      	} 
-	      	else {
-	        	bounds.extend(place.geometry.location);
-	      	}
-    	});
-    	map.fitBounds(bounds);
-  	});
+	makePlacesSearch('search-box');
 };
 
 
@@ -218,7 +169,7 @@ function calcRouteFrom(st, fin) {
 	directionsService.route(request, function(result, status) {
 	    if (status == google.maps.DirectionsStatus.OK) {
 	      	directionsDisplay.setDirections(result);
-	      	console.log(result.routes[0].legs[0].start_address);
+	      	console.log(result);
 	    }
 	});
 };
@@ -257,4 +208,154 @@ function geocodeLatLng(geocoder, map, infowindow, get) {
 function addressToRoute(address) {
 	var input = document.getElementById('search-box').value;
 	calcRouteFrom(address, input);
+};
+
+function makePlacesSearch(inputId) {
+	var input = document.getElementById(inputId);
+	var placesBox = new google.maps.places.SearchBox(input);
+	map.controls[google.maps.ControlPosition.TOP].push(input);
+	
+	map.addListener('bounds_changed', function() {
+    	placesBox.setBounds(map.getBounds());
+  	});
+
+  	// init markers array
+  	markers = [];
+  	
+  	// Listen for the event fired when the user selects a prediction and retrieve
+  	// more details for that place.
+  	placesBox.addListener('places_changed', function() {
+    	var places = placesBox.getPlaces();
+		if (places.length == 0) {
+			return;
+    	}
+
+		// clear out old markers
+	    markers.forEach(function(marker) {
+	      marker.setMap(null);
+	    });
+		
+		markers = [];
+
+		// for each place, get the icon, name and location
+		var bounds = new google.maps.LatLngBounds();
+		
+		places.forEach(function(place) {
+			var icon = {
+		        url: place.icon,
+		        size: new google.maps.Size(71, 71),
+		        origin: new google.maps.Point(0, 0),
+		        anchor: new google.maps.Point(17, 34),
+		        scaledSize: new google.maps.Size(25, 25) 
+		    };
+			// create a marker for each place
+			markers.push(new google.maps.Marker({
+		        map: map,
+		        icon: pinkIcon,
+		        title: place.name,
+		        position: place.geometry.location
+	      	}));
+		    if (place.geometry.viewport) {
+	        	// only geocodes have viewport
+	        	bounds.union(place.geometry.viewport);
+	      	} 
+	      	else {
+	        	bounds.extend(place.geometry.location);
+	      	}
+    	});
+    	map.fitBounds(bounds);
+  	});
+};
+
+function distributeWaypointIcons(points) {
+		dockSpots = document.getElementsByClassName('dockSpot');
+				
+		var numWaypoints = points.length;
+		
+		for (var i = 0; i < numWaypoints; i++) {
+			var space = (100 / (numWaypoints + 1)) * (i +1);
+ 			dockSpots[i].style.marginLeft = 'calc(' + space + '% - 10px)';
+		}		
+};
+
+// for adding waypoints
+// point: location info (maps waypoint)
+// onRoute: boolean- make sure currently on route
+// redistribute: boolean- space waypoints?
+// reorder: boolean- reorder based on user's order?
+function addWaypoint(point, onRoute, redistribute, reorder) {
+	if (!onRoute) {
+		return;
+	}
+	if (point) {
+		waypoints.push(point);
+		var newDockSpot = document.createElement('span');
+		newDockSpot.classList.add('icon');
+		newDockSpot.classList.add('dockSpot');
+		document.getElementById('waypoint-grid').appendChild(newDockSpot);
+		var newPoint = document.createElement('span');
+		newPoint.classList.add('icon');
+		newPoint.classList.add('waypoint');
+		newPoint.draggable = true;
+		newPoint.classList.add('draggable');
+		newPoint.classList.add('drag-drop');
+		newPoint.setAttribute('data-xpos', '0');
+		newPoint.setAttribute('data-x', '0');
+		newDockSpot.appendChild(newPoint);
+	}
+	if (redistribute) {
+		distributeWaypointIcons(document.getElementsByClassName('waypoint'));
+	}
+	if (reorder) {
+		var last = 0;
+		var pts = reorderWaypoints();
+		dockSpots = document.getElementsByClassName('dockSpot');
+		for (var i = 0; i < dockSpots.length; i++) 
+		{
+			while (dockSpots[i].firstChild)
+			{
+				dockSpots[i].removeChild(dockSpots[i].firstChild);
+			}
+			//dockSpots[i].removeChild(dockSpots[i].firstChild);
+			console.log('removed children of dock ' + (i+1));
+		}
+		for (var i = 0; i < pts.length; i ++)
+		{
+			pts[i].setAttribute('data-xpos', dockSpots[i].offsetLeft);
+			if (last == pts[i].getAttribute('data-xpos'))
+			{
+				continue;
+			}
+			last = pts[i].getAttribute('data-xpos');
+			dockSpots[i].appendChild(pts[i]);
+		}
+		distributeWaypointIcons(pts);
+
+	}
+};
+
+function returnOffsetL(element) {
+	var rect = element.getBoundingClientRect();
+	var elementLeft,elementTop; //x and y
+	var scrollTop = document.documentElement.scrollTop?
+	                document.documentElement.scrollTop:document.body.scrollTop;
+	var scrollLeft = document.documentElement.scrollLeft?                   
+	                 document.documentElement.scrollLeft:document.body.scrollLeft;
+	elementTop = rect.top+scrollTop;
+	elementLeft = rect.left+scrollLeft;
+	//return elementLeft;
+	return rect.left;
+};
+
+function sortByPosition(a, b){
+  return a.clientX - b.clientX;
+}
+
+function reorderWaypoints() {
+	var f = function(x) { return parseInt(x.getAttribute("data-x") || 0) + x.parentNode.offsetLeft; };
+	return $(".waypoint").sort(function(a, b) { return f(a) > f(b); });
+};
+
+function compare(a,b) {
+	return returnOffsetL(a) - returnOffsetL(b);
 };

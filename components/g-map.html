@@ -1,0 +1,280 @@
+<!--import polymer -->
+<link rel="import" href="../bower/polymer/polymer.html">
+<dom-module id="g-map"> <!-- id matches tag name -->
+<template>
+	<style>	
+		:host {
+			position: relative;
+			display: block;
+			height: 100%;
+    	}
+		#map {
+	    	position: absolute;
+	    	top: 0px;
+	    	right: 0px;
+	    	bottom: 0px;
+	    	left: 0px;
+	    	max-width: 100%;
+    	}
+	</style>
+	<google-maps-api id="api"
+      api-key="[[apiKey]]"
+      client-id="[[clientId]]"
+      version="[[version]]"
+      signed-in="[[signedIn]]"
+      language="[[language]]"
+      on-api-load="_mapApiLoaded"></google-maps-api>
+	<div id="mapwrap" class="mapWrap">
+		<div id="map" class="gMap"></div>	
+	</div>
+</template>
+<script>
+	
+	var loaderUrl = '';
+	var scriptEl;
+	var defCenter;
+	var la = 0;
+	var ln = 0;
+	
+	Polymer({
+		is: 'g-map',
+	
+		properties: {
+	
+			// dev api key
+			apiKey: {
+				type: String,
+				value: function() {
+					return 'AIzaSyDsvt2rP8CBIaAGPYdaXYNUatrVWD4QtXs';
+				}
+			},
+			
+			// base maps url
+			baseUrl: {
+				type: String,
+				readonly: true,
+				value: 'https://maps.googleapis.com/maps/api/js'
+			},
+			
+			// include places lib by default
+			loadPlaces: {
+				type: Boolean,
+				value: function() {
+					return true;
+				}
+			},
+			
+			// google maps api object
+			map: {
+				type: Object,
+				value: null
+			},
+			
+			// latitude of map center
+			centerLat: {
+				type: Number,
+				value: function() {
+					la = 41.8925270;
+					return 41.8925270;
+				}
+			},
+			
+			// longitude of map center
+			centerLong: {
+				type: Number,
+				value: function() {
+					ln = -87.6242880;
+					return -87.6242880;
+				}
+			},
+
+			// map zoom level
+			zoom: {
+				type: Number,
+				value: function() {
+					return 10;
+				}
+			},
+			
+			// custom styles
+			styles: {
+				type: Object,
+				value: function() {
+					return {};
+				}
+			},
+			
+			// roadmap, satellite, hybrid, or terrain
+			mapType: {
+				type: String,
+				value: function() {
+					return 'roadmap';
+				}
+			},
+			
+			// click events auto-enabled
+			clickEvents: {
+				type: Boolean,
+				value: function() {
+					return true;
+				}
+			},
+			
+			// drag events are not auto-enabled
+			dragEvents: {
+				type: Boolean,
+				value: function() {
+					return false;
+				}
+			},
+			
+			// mouse events auto-enabled
+			mouseEvents: { 
+				type: Boolean,
+				value: function() {
+					return true;
+				}
+			},
+			
+			markers: {
+				type: Array,
+				value: function() {
+					return [];
+				}
+			},
+			
+			objects: {
+				type: Array,
+				value: function() {
+					return [];
+				}
+			},
+			
+			moreOptions: {
+				type: Object,
+				value: function() {
+					return {};
+				}
+			},
+
+			mapWidth: {
+				type: String,
+				value: function() {
+					return '100%';
+				}
+			},
+			
+			apiCallback: {
+				type: String,
+				value: function() {
+					return 'makeMap';
+				}
+			},
+			
+			// full api url
+			fullUrl: {
+				type: String,
+				computed: 'setUrl(baseUrl, apiKey, loadPlaces, apiCallback)'
+			}
+		
+		},
+		
+		listeners: {
+			
+		},
+		
+		observers: {
+			
+		},
+		
+		// make sure map is set to desired size
+		ready: function() {
+			if (this.mapWidth)
+			{
+				this.style.width = this.mapWidth;
+				this.style.maxWidth = this.mapWidth;
+			}
+		},
+		
+		//standard naming:
+		// setStuff
+		// getStuff
+		// clearStuff
+		// thingLoaded
+		
+		setUrl: function(baseUrl, apiKey, loadPlaces, apiCallback) {
+			var url = baseUrl + '&key=' + apiKey + '&libraries=drawing,geometry,visualization';
+			if (loadPlaces) {
+				url += ',places';
+			}	
+			url += '&callback=' + apiCallback;
+			loaderUrl = url;
+			return url;
+		},
+		
+		mapLoaded: function() {
+			
+		},
+		
+		setOptions: function() {
+			
+		},
+		
+		getOptions: function() {
+			
+		},
+		
+		setMarkers: function() {
+			
+		},
+		
+		getMarkers: function() {
+			
+		},
+		
+		clearMarkers: function() {
+			
+		},
+		
+		setListeners: function() {
+			
+		},
+		
+		clearListeners: function() {
+			
+		}
+	});
+
+	// create async script to load the map
+    if (loaderUrl.length > 0) {
+	    scriptEl = document.createElement('script');
+	    scriptEl.src = loaderUrl;
+		scriptEl.async = 'async';
+		scriptEl.defer = 'defer';
+		scriptEl.onload = whenLoaded;
+		document.getElementsByTagName('body')[0].appendChild(scriptEl);
+	}
+	else {
+		scriptEl = null;
+	}
+	
+	get api() {
+      return google.maps;
+    }
+	
+    function whenLoaded() {
+    	console.log('api script executed?');   
+    }
+    
+    function makeMap() {
+	    defCenter = new google.maps.LatLng({lat: la, lng: ln});
+	    map = new google.maps.Map(document.getElementById('map'), {
+			center: defCenter,
+			zoom: 6
+		});
+    }
+    
+</script>
+</dom-module>
+
+

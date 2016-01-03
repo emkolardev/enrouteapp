@@ -19,8 +19,9 @@ $t: transparent;
 $standgreen: #28AF7D;
 $opacitygreen: rgba(68,188,139,0.7);
 $hovergreen: #44BC8B;
-//$standpink
-//$standblue
+$standpink: rgba(208,46,82,1);
+$standblue: rgba(42,142,200,1);
+$codablue: rgba(35,155,212,1);
 
 @mixin applyKeyframes($name, $duration, $timing: ease-out, $delay: 0s, $iteration: 1, $direction: normal) {
 	animation-name: $name;
@@ -241,13 +242,13 @@ $hovergreen: #44BC8B;
 			background-color: $hovergreen;
 		}
 		&.docked {
-			@include applyKeyframes(floatIcon, 0.4s);
+			//@include applyKeyframes(floatIcon, 0.4s);
 			height: 20px;
 			width: 20px;
 			margin-top: -30px;
 			background-size: 20px 20px;
 			border-radius: 50%;
-			opacity: 0.8;
+			background-color: $standgreen;
 		}
 	} // end car icon
 	// waypoint dock start icon
@@ -274,13 +275,48 @@ $hovergreen: #44BC8B;
 		&.expanded {
 			@include applyKeyframes(fadein, 0.5s, $timing: ease-in);
 			display: block;
-			width: 70%;
+			width: calc(100% - 70px);
 			float: left;
-			margin-left: 15%;
+			margin-left: 35px;
 			margin-top: 20px;
 		}
 	}// end path icon
+	// waypoint icons
+	&.waypoint {
+		display: block;
+		width: 20px;
+		height: 20px;
+		border-radius: 50%;
+		background-color: $standgreen;
+		cursor: move;	
+		background-image: url('../images/get.png');
+		background-size: 20px 20px;
+	} // end waypoint icons
+	/*
+&.startNav {
+		width: 150px;
+		height: 50px;
+	}
+*/
 } // end icons
+
+.waypointGrid {
+	display: block;
+	width: calc(100% - 70px);
+	height: 20px;
+	margin-left: 35px;
+	margin-top: 10px;
+	position: absolute;
+}
+
+// drop-zones in dock
+
+.dockSpot {
+	width: 20px;
+	height: 20px;
+	display: block;
+	position: absolute;
+} // end drop zones
 
 // places searchbox
 .searchBox {
@@ -321,9 +357,11 @@ $hovergreen: #44BC8B;
 	
 	.waypointIcons {
 		width: $maxw;
+		display: none;
 		
 		&.expanded {
 			height: 30px;
+			display: block;
 			@include applyKeyframes(growDock, 0.3s);
 		}
 
@@ -371,23 +409,23 @@ $hovergreen: #44BC8B;
 
 @-moz-keyframes floatIcon {
 	0%
-	{ height: 80px; width: 20%; margin-top: 0px; background-size: 40px 40px; }
+	{ height: 80px; width: 20%; margin-top: 0px; background-size: 40px 40px; background-color: $standgreen; }
 	100%
-	{ height: 20px; width: 20px; margin-top: -30px; background-size: 20px 20px; }
+	{ height: 20px; width: 20px; margin-top: -30px; background-size: 20px 20px; background-color: $standblue; }
 }
 
 @-webkit-keyframes floatIcon {
 	0%
-	{ height: 80px; width: 20%; margin-top: 0px; background-size: 40px 40px; }
+	{ height: 80px; width: 20%; margin-top: 0px; background-size: 40px 40px; background-color: $standgreen; }
 	100%
-	{ height: 20px; width: 20px; margin-top: -30px; background-size: 20px 20px; }
+	{ height: 20px; width: 20px; margin-top: -30px; background-size: 20px 20px; background-color: $standblue; }
 }
 
 @keyframes floatIcon {
 	0%
-	{ height: 80px; width: 20%; margin-top: 0px; background-size: 40px 40px; }
+	{ height: 80px; width: 20%; margin-top: 0px; background-size: 40px 40px; background-color: $standgreen; }
 	100%
-	{ height: 20px; width: 20px; margin-top: -30px; background-size: 20px 20px; }
+	{ height: 20px; width: 20px; margin-top: -30px; background-size: 20px 20px; background-color: $standblue; }
 }
 
 @-moz-keyframes buttonFade {

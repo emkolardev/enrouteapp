@@ -103,7 +103,13 @@
   background-repeat: no-repeat;
   background-position: center;
   border-radius: 2px;
-  display: block; }
+  display: block;
+  /*
+&.startNav {
+		width: 150px;
+		height: 50px;
+	}
+*/ }
   .icon:hover {
     background-color: transparent; }
   .icon.menu {
@@ -165,18 +171,12 @@
       animation-direction: normal;
       background-color: #44BC8B; }
     .icon.car.docked {
-      animation-name: floatIcon;
-      animation-duration: 0.4s;
-      animation-timing-function: ease-out;
-      animation-delay: 0s;
-      animation-iteration-count: 1;
-      animation-direction: normal;
       height: 20px;
       width: 20px;
       margin-top: -30px;
       background-size: 20px 20px;
       border-radius: 50%;
-      opacity: 0.8; }
+      background-color: #28AF7D; }
   .icon.start {
     display: none; }
     .icon.start.expanded {
@@ -201,10 +201,33 @@
       animation-iteration-count: 1;
       animation-direction: normal;
       display: block;
-      width: 70%;
+      width: calc(100% - 70px);
       float: left;
-      margin-left: 15%;
+      margin-left: 35px;
       margin-top: 20px; }
+  .icon.waypoint {
+    display: block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #28AF7D;
+    cursor: move;
+    background-image: url("../images/get.png");
+    background-size: 20px 20px; }
+
+.waypointGrid {
+  display: block;
+  width: calc(100% - 70px);
+  height: 20px;
+  margin-left: 35px;
+  margin-top: 10px;
+  position: absolute; }
+
+.dockSpot {
+  width: 20px;
+  height: 20px;
+  display: block;
+  position: absolute; }
 
 .searchBox {
   border-radius: 2px;
@@ -241,9 +264,11 @@
     width: 100%;
     height: 100px; }
   .footer .waypointIcons {
-    width: 100%; }
+    width: 100%;
+    display: none; }
     .footer .waypointIcons.expanded {
       height: 30px;
+      display: block;
       animation-name: growDock;
       animation-duration: 0.3s;
       animation-timing-function: ease-out;
@@ -259,152 +284,225 @@
 
 .floats.r {
   float: right; }
+
 .floats.l {
   float: left; }
 
 @-moz-keyframes fadein {
-  0% {
+  0%
+{
     display: none;
     width: 0; }
-  100% {
+  100%
+{
     display: block;
     width: 70%; } }
+
 @-webkit-keyframes fadein {
-  0% {
+  0%
+{
     display: none;
     width: 0; }
-  100% {
+  100%
+{
     display: block;
     width: 70%; } }
+
 @keyframes fadein {
-  0% {
+  0%
+{
     display: none;
     width: 0; }
-  100% {
+  100%
+{
     display: block;
     width: 70%; } }
+
 @-moz-keyframes floatIcon {
-  0% {
+  0%
+{
     height: 80px;
     width: 20%;
     margin-top: 0px;
-    background-size: 40px 40px; }
-  100% {
+    background-size: 40px 40px;
+    background-color: #28AF7D; }
+  100%
+{
     height: 20px;
     width: 20px;
     margin-top: -30px;
-    background-size: 20px 20px; } }
+    background-size: 20px 20px;
+    background-color: #2a8ec8; } }
+
 @-webkit-keyframes floatIcon {
-  0% {
+  0%
+{
     height: 80px;
     width: 20%;
     margin-top: 0px;
-    background-size: 40px 40px; }
-  100% {
+    background-size: 40px 40px;
+    background-color: #28AF7D; }
+  100%
+{
     height: 20px;
     width: 20px;
     margin-top: -30px;
-    background-size: 20px 20px; } }
+    background-size: 20px 20px;
+    background-color: #2a8ec8; } }
+
 @keyframes floatIcon {
-  0% {
+  0%
+{
     height: 80px;
     width: 20%;
     margin-top: 0px;
-    background-size: 40px 40px; }
-  100% {
+    background-size: 40px 40px;
+    background-color: #28AF7D; }
+  100%
+{
     height: 20px;
     width: 20px;
     margin-top: -30px;
-    background-size: 20px 20px; } }
+    background-size: 20px 20px;
+    background-color: #2a8ec8; } }
+
 @-moz-keyframes buttonFade {
-  0% {
+  0%
+{
     background-color: #b85096; }
-  100% {
+  100%
+{
     background-color: #d269af; } }
+
 @-webkit-keyframes buttonFade {
-  0% {
+  0%
+{
     background-color: #b85096; }
-  100% {
+  100%
+{
     background-color: #d269af; } }
+
 @keyframes buttonFade {
-  0% {
+  0%
+{
     background-color: #b85096; }
-  100% {
+  100%
+{
     background-color: #d269af; } }
+
 @-moz-keyframes greenFade {
-  0% {
+  0%
+{
     background-color: #28AF7D; }
-  100% {
+  100%
+{
     background-color: #44BC8B; } }
+
 @-webkit-keyframes greenFade {
-  0% {
+  0%
+{
     background-color: #28AF7D; }
-  100% {
+  100%
+{
     background-color: #44BC8B; } }
+
 @keyframes greenFade {
-  0% {
+  0%
+{
     background-color: #28AF7D; }
-  100% {
+  100%
+{
     background-color: #44BC8B; } }
+
 @-moz-keyframes slideMenu {
-  0% {
+  0%
+{
     display: none;
     background-color: transparent; }
-  100% {
+  100%
+{
     display: block;
     background-color: rgba(0, 0, 0, 0.65); } }
+
 @-webkit-keyframes slideMenu {
-  0% {
+  0%
+{
     display: none;
     background-color: transparent; }
-  100% {
+  100%
+{
     display: block;
     background-color: rgba(0, 0, 0, 0.65); } }
+
 @keyframes slideMenu {
-  0% {
+  0%
+{
     display: none;
     background-color: transparent; }
-  100% {
+  100%
+{
     display: block;
     background-color: rgba(0, 0, 0, 0.65); } }
+
 @-moz-keyframes spin {
-  100% {
+  100%
+{
     -moz-transform: rotate(360deg); } }
+
 @-webkit-keyframes spin {
-  100% {
+  100%
+{
     -webkit-transform: rotate(360deg); } }
+
 @keyframes spin {
-  100% {
+  100%
+{
     transform: rotate(360deg); } }
+
 @-moz-keyframes growDock {
-  0% {
+  0%
+{
     height: 0px; }
-  100% {
+  100%
+{
     height: 30px; } }
+
 @-webkit-keyframes growDock {
-  0% {
+  0%
+{
     height: 0px; }
-  100% {
+  100%
+{
     height: 30px; } }
+
 @keyframes growDock {
-  0% {
+  0%
+{
     height: 0px; }
-  100% {
+  100%
+{
     height: 30px; } }
+
 @-moz-keyframes growFooter {
-  0% {
+  0%
+{
     height: 100px; }
-  100% {
-    height: 130px; } }
-@-webkit-keyframes growFooter {
-  0% {
-    height: 100px; }
-  100% {
-    height: 130px; } }
-@keyframes growFooter {
-  0% {
-    height: 100px; }
-  100% {
+  100%
+{
     height: 130px; } }
 
-/*# sourceMappingURL=stylesheet.css.map */
+@-webkit-keyframes growFooter {
+  0%
+{
+    height: 100px; }
+  100%
+{
+    height: 130px; } }
+
+@keyframes growFooter {
+  0%
+{
+    height: 100px; }
+  100%
+{
+    height: 130px; } }

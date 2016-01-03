@@ -11,6 +11,7 @@ var waypointDock;
 var dockStart; 
 var instruct;
 var waypointPath;
+var waypointIcons;
 var directIcon;
 
 (function() {
@@ -30,6 +31,7 @@ var directIcon;
 	instruct = document.getElementById('instruct');
 	waypointPath = document.getElementById('path-icon');
 	directIcon = document.getElementById('direction-icon');
+	waypointIcons = [];
 	
 	// add event listeners
 	locIcon.addEventListener('click', function() {
@@ -77,6 +79,5 @@ var directIcon;
 
 
 function showInstruct() {
-	instruct.innerHTML = 'Head <strong>WEST</strong> on<br />' +
-		'<span style="font-size: 18px">Boulevards Street</span>';
+	instruct.innerHTML = '<button type="button" class="button icon startNav">Start Navigation</button>';
 }
