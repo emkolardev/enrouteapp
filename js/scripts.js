@@ -17,6 +17,7 @@ var directionsService;
 var placeService;
 var geocoder;
 var waypts;
+var wayptsPreliminary;
 var dockSpots;
 var time;
 var addedTime;
@@ -26,6 +27,9 @@ var maneuverList;
 var currentInstruct; 
 var instructLocs;
 var steps;
+var classesToAdd;
+var distances;
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // google maps api callback - do all the things!
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -45,8 +49,10 @@ function initMap() {
 	dockSpots = [];
 	instructList = [];
 	steps = [];
+	classesToAdd = [];
 	maneuverList = [];
 	instructLocs = [];
+	distances = [];
 	currentInstruct = 0;
 	
 	// set a default center: chicago; zoomed out to general midwest
@@ -171,23 +177,49 @@ function calcRoute() {
 // calculate route, show directions
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 function calcRouteFrom(st, fin) {
-	var start = st;
-	var end = fin;
-	var request = {
-		origin:start,
-	    destination:end,
-	    travelMode: google.maps.TravelMode.DRIVING
-	};
+	var request = {};
+	//var start = st;
+	//var end = fin;
+	if (!onRoute) {
+		request = {
+			origin: st,
+		    destination: fin,
+		    travelMode: google.maps.TravelMode.DRIVING
+		};
+	}
+	else {
+		request = {
+			origin: st,
+			destination: fin,
+			waypoints: waypts,
+			optimizeWaypoints: true,
+			travelMode: google.maps.TravelMode.DRIVING	
+		};
+	}
 	directionsService.route(request, function(result, status) {
+		distances = []; instructLocs = []; instructList = []; maneuverList = []; currentInstruct = 0;
 	    if (status == google.maps.DirectionsStatus.OK) {
 	      	directionsDisplay.setDirections(result);
-	      	console.log(result.routes[0].legs[0].steps);
-	      	for (var i = 0; i < result.routes[0].legs[0].steps.length; i++)
-			{
-				instructLocs[i] = { lat: result.routes[0].legs[0].steps[i].start_location.lat(), lng: result.routes[0].legs[0].steps[i].start_location.lng() };
-				instructList[i] = result.routes[0].legs[0].steps[i].instructions;
-				maneuverList[i] = result.routes[0].legs[0].steps[i].maneuver;
+	      	document.querySelector('#search-box').value = "";
+	      	console.log(result.routes[0]);
+	      	for (var i = 0; i < result.routes[0].legs.length; i++)
+	      	{	
+		      	console.log(result.routes[0].legs[i].steps);      	
+		      	for (var j = 0; j < result.routes[0].legs[i].steps.length; j++)
+				{
+				
+					distances.push({ value: result.routes[0].legs[i].steps[j].distance.value, text: result.routes[0].legs[i].steps[j].distance.text });
+					instructLocs.push({ lat: result.routes[0].legs[i].steps[j].start_location.lat(), lng: result.routes[0].legs[i].steps[j].start_location.lng() });
+					instructList.push(result.routes[0].legs[i].steps[j].instructions);
+					maneuverList.push(result.routes[0].legs[i].steps[j].maneuver);
+				}
 			}
+	    if (onRoute) {
+			currentInstruct = 0;
+			showNextDirection();
+			map.setZoom(17);
+			map.setCenter(instructLocs[0]);
+	}
 	    }
 	});
 };
@@ -199,14 +231,9 @@ function calcRouteForTime(st, fin, f, x) {
 */
 	var request;
 	if (x != null) {
-		waypts.push({
-			location: fin,
-			stopover: false
-		});
 		request = {
 			origin: st,
-			destination: finalDestination.formatted_address,
-			waypoints: waypts,
+			destination: fin,
 			travelMode: google.maps.TravelMode.DRIVING
 		};
 	}
@@ -231,6 +258,7 @@ function calcRouteForTime(st, fin, f, x) {
 	    }
 	});
 };
+
 
 function clearMarkers() {
 	
@@ -261,6 +289,7 @@ function geocodeLatLng(geocoder, map, infowindow, get) {
 					if (get) { 
 						clearMarkers(); 
 						calcRouteFrom(results[0].formatted_address, finalDestination.formatted_address);
+						
 					}
 					//infowindow.setContent(results[1].formatted_address);
 					//infowindow.open(map, marker);
@@ -284,17 +313,23 @@ function geocodeGetTime(geocoder, map, infowindow, place) {
 		geocoder.geocode({'location': latlng}, function(results, status) {
 			if (status === google.maps.GeocoderStatus.OK) {
 				if (results[0]) {
-					if (finalDestination)
+					if (onRoute)
 					{ 
+						wayptsPreliminary = [];
+						//wayptsPreliminary = waypts;
+						wayptsPreliminary.push({ location: place.formatted_address, stopover: true });
 						calcRouteForTime(results[0].formatted_address, place.formatted_address, null, function() {
 							document.querySelector('#instruct').innerHTML = '<span style="font-size: 12px">Add This Pitstop?</span><br />' + place.name + '<br /><span style="font-size: 14px">' + time + '</span>';
 						});
+						getNext.classList.add('confirm');
 						return;
 					}
-					calcRouteForTime(results[0].formatted_address, place.formatted_address, function() { 
-						document.querySelector('#instruct').innerHTML = '<span style="font-size: 12px">Get Directions To:</span><br />' + place.name + '<br /><span style="font-size: 14px">' + time + '</span>'; 
-						finalDestination = place;
-					}, null);
+					else {
+						calcRouteForTime(results[0].formatted_address, place.formatted_address, function() { 
+							document.querySelector('#instruct').innerHTML = '<span style="font-size: 12px">Get Directions To:</span><br />' + place.name + '<br /><span style="font-size: 14px">' + time + '</span>'; 
+							finalDestination = place;
+						}, null);
+					}
 					//infowindow.setContent(results[1].formatted_address);
 					//infowindow.open(map, marker);
       			} 
@@ -310,13 +345,95 @@ function geocodeGetTime(geocoder, map, infowindow, place) {
 };
 
 function showNextDirection() {
+	getNext.classList.remove('done');
+	if (currentInstruct == 0) { getNext.classList.add('next'); }
 	var stepLoc = new google.maps.LatLng({lat: instructLocs[currentInstruct].lat, lng: instructLocs[currentInstruct].lng});
-	map.setZoom(17);
 	map.setCenter(stepLoc);
+	map.setZoom(17);
 	document.querySelector('#instruct').innerHTML = instructList[currentInstruct];
 	console.log(instructList[currentInstruct], maneuverList[currentInstruct]);
+	for (var i = 0; i < classesToAdd.length; i++)
+	{
+		directIcon.classList.remove(classesToAdd[i]);
+	}
+	classesToAdd = [];
+	switch(maneuverList[currentInstruct])
+	{
+		case "turn-left":
+			classesToAdd.push('turn');
+			classesToAdd.push('left');
+			break;
+		case "turn-right":
+			classesToAdd.push('turn');
+			classesToAdd.push('right');
+			break;
+		case "fork-left":
+			classesToAdd.push('fork');
+			classesToAdd.push('left');
+			break;
+		case "fork-right":
+			classesToAdd.push('fork');
+			classesToAdd.push('right');
+			break;
+		case "keep-left":
+			classesToAdd.push('keep');
+			classesToAdd.push('left');
+			break;
+		case "keep-right":
+			classesToAdd.push('keep');
+			classesToAdd.push('right');
+			break;
+		case "ramp-left":
+			classesToAdd.push('ramp');
+			classesToAdd.push('left');
+			break;
+		case "ramp-right":
+			classesToAdd.push('ramp');
+			classesToAdd.push('right');
+			break;
+		case "merge":
+			classesToAdd.push('merge');
+			break;
+		default:
+			var textClass = instructList[currentInstruct].substring(instructList[currentInstruct].indexOf('<b>') + 3, instructList[currentInstruct].indexOf('</'));
+			if (textClass != 'right' && textClass != 'left')
+			{
+				classesToAdd.push('head');
+				if (textClass != 'north' &&  textClass != 'south' && textClass != 'east' && textClass != 'west') 
+				{ 
+					classesToAdd.push('notGiven'); 
+					console.log('none');
+					break;
+				}
+			}
+			classesToAdd.push(textClass);
+			break;
+						/*
+if (instructList[currentInstruct].substring(instructList[currentInstruct].indexOf('<b>') + 3, instructList[currentInstruct].indexOf('</')) == 'right');
+			{
+				classesToAdd.push('right');
+				console.log('says right?');
+			}
+			if (instructList[currentInstruct].substring(instructList[currentInstruct].indexOf('<b>') + 3, instructList[currentInstruct].indexOf('</')) == 'north');
+			{
+				classesToAdd.push('right');
+				console.log('says right?');
+			}
+*/
+			break;
+	}
+	for (var i = 0; i < classesToAdd.length; i++)
+	{
+		directIcon.classList.add(classesToAdd[i]);
+	}
 	currentInstruct++;
-	
+	if (currentInstruct >= instructList.length)
+	{
+		document.querySelector('#instruct').innerHTML = instructList[instructList.length - 1] + '<br />(Destination is ' + distances[distances.length - 1].text + ' ahead)';
+		getNext.classList.remove('next');
+		getNext.classList.add('done');
+		currentInstruct = 0;
+	}
 };
 
 function addressToRoute(address) {
@@ -371,8 +488,9 @@ function makePlacesSearch(inputId) {
 		    });
 		    
 	      	thisMarker.addListener('click', function() {
+		      	wayptsPreliminary = [];
 		      	//var nameSubstring = this.title.substring(0, this.title.indexOf(':'));
-		      	if (finalDestination) {
+		      	if (onRoute) {
 			      	document.querySelector('#instruct').innerHTML = '<span style="font-size: 12px">Add This Pitstop?</span><br />' + place.name + '<br /><div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>';
 		      	}
 		      	else { 
@@ -397,7 +515,12 @@ function makePlacesSearch(inputId) {
 };
 
 function confirmWaypoint() {
-	document.querySelector('#instruct').innerHTML = '<span style="font-size: 12px">Add This Pitstop?</span><br />' + place.name + '<br /><div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>';
+	for (var i = 0; i < wayptsPreliminary.length; i++)
+	{
+		waypts.push(wayptsPreliminary[i]);	
+	}
+	wayptsPreliminary = [];
+	geocodeLatLng(geocoder, map, infoWindow, true);
 };
 
 function distributeWaypointIcons(points) {

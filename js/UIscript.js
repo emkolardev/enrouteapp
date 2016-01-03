@@ -51,15 +51,21 @@ var startNav;
 	});
 	
 	getNext.addEventListener('click', function() {
-		if (onRoute) 
+		if (getNext.classList.contains('confirm'))
+		{
+			confirmWaypoint();
+			getNext.classList.remove('confirm');
+			showInstruct();
+		}
+		else if (onRoute) 
 		{
 			getNext.classList.add('retrieving');
 			setTimeout(function() {
 				getNext.classList.remove('retrieving');
-			}, 300);
-			showNextDirection();
+			}, 200);
+			showInstruct();
 		}
-		if (!onRoute) 
+		else if (!onRoute) 
 		{
 			geocodeLatLng(geocoder, map, infoWindow, true);
 			setTimeout(function() {
@@ -73,7 +79,6 @@ var startNav;
 				finalDestIcon.classList.add('docked');
 				showInstruct();
 			}, 1200);
-			onRoute = true;
 		}
 		
 	});
@@ -99,8 +104,23 @@ var startNav;
 
 function showInstruct() {
 	instruct.innerHTML = '<button type="button" class="button icon startNav" id="start-nav">Start Navigation</button>';
-	startNav = document.getElementById('start-nav');
-	startNav.addEventListener('click', function() {
+	if (!onRoute) {
+		startNav = document.getElementById('start-nav');
+		startNav.addEventListener('click', function() {
+			getNext.classList.remove('g20');
+			getNext.classList.add('g10');
+			getNext.classList.remove('docked');
+			getNext.classList.add('growIt');
+			setTimeout(function() {
+				getNext.classList.add('next');
+				getNext.classList.remove('growIt');
+			}, 500);
+			startNav.classList.add('started');
+			onRoute = true;
+			showNextDirection();
+		});
+	}
+	else {
 		getNext.classList.remove('g20');
 		getNext.classList.add('g10');
 		getNext.classList.remove('docked');
@@ -109,7 +129,7 @@ function showInstruct() {
 			getNext.classList.add('next');
 			getNext.classList.remove('growIt');
 		}, 500);
-		startNav.classList.add('started');
 		showNextDirection();
-	});
+
+	}
 }

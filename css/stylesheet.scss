@@ -221,11 +221,39 @@ $codablue: rgba(35,155,212,1);
 		border-radius: $standrad;
 		background-color: $t;
 		background-image: url('../images/arrow-white-r.png');
-		background-size: 20px 20px;
+		background-size: 40px 60px;
 		visibility: hidden;
 		&.show {
-			//visibility: visible;
+			visibility: visible;
 		}
+		&.head {
+			background-image: url('../images/next-arrow-r.png');
+			background-size: 20px 60px;
+			&.west {
+				transform: rotate(180deg);
+			}
+			&.north {
+				transform: rotate(270deg);
+			}
+			&.south {
+				transform: rotate(90deg);
+			}
+			&.east {
+					
+			}
+			&.notGiven {
+				background-image: url('../images/next-arrow-r.png');
+				transform: rotate(270deg);
+			}
+			
+		}
+		&.right {
+			background-image: url('../images/arrow-white-r.png');
+		}
+		&.left {
+			background-image: url('../images/arrow-white-l.png');
+		}
+	
 	} // end direction icon
 	// car icon
 	&.getNext {
@@ -236,24 +264,36 @@ $codablue: rgba(35,155,212,1);
 		background-size: 40px 40px;
 		cursor: pointer;
 		text-align: center;
-		@include applyKeyframes(greenFade, 0.5s, $delay: 1s, $iteration: 6, $direction: alternate);
-		&:hover {
-			@include applyKeyframes(greenFade, 0.4s);
-			background-color: $hovergreen;
-		}
 		&.docked {
 			display: none;
 		}
 		&.next {
-			background-image: url('../images/next-arrow.png');
+			@include applyKeyframes(greenFade, 0.5s, $delay: 1s, $iteration: 6, $direction: alternate);
+			background-image: url('../images/next-arrow-r.png');
 			background-size: 20px 20px;
+				&:hover {
+				@include applyKeyframes(greenFade, 0.5s, $delay: 1s, $iteration: 6, $direction: alternate);
+				background-color: $hovergreen;
+			}
 		}
 		&.growIt {
 			@include applyKeyframes(growGeneric, 0.2s);
-			background-image: url('../images/next-arrow.png');
+			background-image: url('../images/next-arrow-r.png');
 		}
 		&.retrieving {
 			@include applyKeyframes(growGeneric, 0.1s);
+		}
+		&.done {
+			background-color: $standpink;
+			background-image: url('../images/checkmark.png');
+			&.hover {
+				@include applyKeyframes(growGeneric, 0s);
+				background-color: $standpink;
+			}
+		}
+		&.confirm {
+			background-image: url('../images/add.png');
+			background-size: 40px 40px;
 		}
 		/*
 &.docked {
