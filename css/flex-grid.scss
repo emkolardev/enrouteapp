@@ -1,0 +1,130 @@
+@mixin flex($direction, $justify, $wrap: nowrap, $items: stretch, $content: stretch) {
+	display: flex;
+	flex-direction: $direction;
+	flex-wrap: $wrap;
+	align-items: $items;
+	align-content: $content;
+}
+
+@mixin flexItem($grow: 1, $shrink: 1, $basis: auto, $alignSelf: auto, $order: auto) {
+	order: $order;
+	flex-grow: $grow;
+	flex-shrink: $shrink;
+	flex-basis: $basis;
+	align-self: $alignSelf;
+}
+
+@mixin calcW($numCols) {
+ 	width: calc((100% / 12) * $numCols);
+	max-width: calc((100% / 12) * $numCols);
+}
+
+.row {
+	@include flex($direction: row, $justify: space-around);
+	&.fill {
+		justify-content: stretch;
+	}
+	&reverse {
+		flex-direction: row-reverse;
+	}
+}
+
+.column, .columns {
+
+	margin: 0 auto;
+	height: 100%;
+	
+	&.one {
+		width: calc(100% / 12);
+	}
+	&.two {
+		width: calc((100% / 12) * 2);
+	}
+	&.three {
+		@include calcW(3);
+	}
+	&.four {
+		@include calcW(4);
+	}
+	&.five {
+		@include calcW(5);
+	}
+	&.six {
+		@include calcW(6);
+	}
+	&.seven {
+		@include calcW(7);
+	}
+	&.eight {
+		@include calcW(8);
+	}
+	&.nine {
+		@include calcW(9);
+	}
+	&.ten {
+		@include calcW(10);
+	}
+	&.eleven {
+		@include calcW(11);
+	}
+	&.twelve {
+		@include calcW(12);
+		min-width: 100%;
+	}
+	&.fourth {
+		width: 25%;
+	}
+	&.third {
+		width: calc(100% / 3);
+	}
+	&.half {
+		width: 50%;
+	}
+	&.two-thirds {
+		width: calc((100% / 3) * 2);
+	}
+	&.three-quarters {
+		width: 75%;
+	}
+	&.down {
+		@include flex($direction: column, $justify: space-around);
+		&.stretch {
+			justify-content: stretch;
+			//@include flex($direction: column, $justify: stretch);
+		}
+		&.reverse {
+			flex-direction: column-reverse;
+		}
+	}
+}
+
+.grow {
+	@include flexItem();
+	&.x1 {
+		flex-grow: 1;
+	}
+	&.x2 {
+		flex-grow: 2;
+	}
+	&.x3 {
+		flex-grow: 3;
+	}
+	&.x4 {
+		flex-grow: 4;
+	}
+	&.x5 {
+		flex-grow: 5;
+	}
+	&.x6 {
+		flex-grow: 6;
+	}
+	&.x7 {
+		flex-grow: 7;
+	}
+	&.x8 {
+		flex-grow: 8;
+	}
+	&.stretched {
+		align-self: stretch;
+	}
+}

@@ -4,131 +4,181 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Find EnRoute</title>
+	<title>EnRoute</title>
 	<meta name="author" content="Emily Kolar">
-	<script src="js/vendor/interact.min.js"></script>
-	<link rel="stylesheet" href="css/vendor/normalize.css" title="normalize" type="text/css" media="screen" charset="utf-8">
-	<link rel="stylesheet" href="css/vendor/base.css" title="base styles" type="text/css" media="screen" charset="utf-8">
-	<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="css/stylesheet.css" type="text/css" media="screen" charset="utf-8">
+	<link rel="stylesheet" href="css/vendor/normalize.css" type="text/css">
+	<!--<link rel="stylesheet" href="css/skeleton-modified.css" type="text/css">-->
+	<!--<link rel="stylesheet" href="css/vendor/animate-scss/animate.css" type="text/css">-->
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+	<link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="css/style.css" type="text/css">
 </head>
 <body>
-	<div class="container" id="page-container">
-		<div class="gMap" id="map">
-		</div>
-		<button type="button" class="button icon menu" id="menu-icon"></button>
-		<input type="text" class="searchBox" id="search-box" placeholder="Where to?" />
-		<button type="button" class="button icon loc" id="loc-icon"></button>
-		<!--<input type="text" class="waypointBox" id="waypoint-box" placeholder="Find on route..." />-->
-<!--
-		<div class="sideMenu" id="side-menu">
-			<span class="icon userIcon"></span>
-			<button type="button" class="button optionToggle goNight" id="style-button"></button>
-		</div>
--->
-		<div class="footer hidden" id="footer-bar">
-			<div class="waypointIcons dropzone" id="waypoint-dock">
-				<span class="waypointGrid" id="waypoint-grid"></span>
+	
+	<div class="app" id="app"> <!-- app container (restrict size) -->
 
-				<span class="icon start" id="dock-start"></span>
-				<span class="icon path" id="path-icon"></span>
-				<span class="icon finalDestination floats r" id="destination-icon"></span>
 
-			</div>
-			<div class="directionBar grid" id="direction-bar">
-				<span class="g10 icon direction floats l" id="direction-icon"></span>
-				<p class="instructions g60" id="instruct">Get Directions To:<br />123 Address Lane<br />Chicago, IL 60657</p>
-				<span class="g20 icon getNext floats r" id="get-next"></span>
-			</div>
-		</div>
-	</div>
-	<script async defer
+
+
+		<div class="gmap" id="map"> <!-- google maps object -->		
+		</div> <!-- end google maps object -->
+		
+
+
+		<div class="twelve columns flexRow overMap topToolbar" id="top-toolbar"> <!-- all the header-region tools -->
+		
+			<div class="one column flexCol toggleMenu" id="toggle-menu"> <!-- stack menu icon -->
+				<div class="menuFrame flexCol" id="menu-frame">
+					<span class="icon iconMenu" id="icon-menu"></span>
+				</div>
+			</div> <!-- end menu icon --> 
+			
+			<div class="ten columns searchBar" id="places-search"> <!-- holds the places search -->	
+				<input type="text" class="twelve columns placesInput" id="place-input" placeholder="Where to?"/>			
+			</div> <!-- end places search area -->
+			
+			<div class="one column flexCol locationBtn" id="location-btn"> <!-- location icon to get current -->	
+				<span class="twelve columns icon iconLocation" id="icon-location"></span>		
+			</div> <!-- end get current location -->
+		
+		</div> <!-- end header tools -->
+
+
+		
+		<div class="twelve columns overMap btmToolbar" id="btm-toolber"> <!-- all the footer-region tools -->
+			
+			<div class="twelve columns flexRow waypointBar" id="waypoint-bar"> <!-- holds waypoint dots/anims -->
+			
+				<div class="one columns flexCol endpoint startPoint" id="endpoint"> <!-- area for starting location icon -->	
+					<span class="icon iconEndpoint start" id="waypoint-start"></span>
+				</div> <!-- end start location area -->
+				<div class="ten columns flexCol miniMap" id="mini-map"> <!-- mini map region -->	
+					<div class="flexRow dock" id="dock">
+						<div class="pointBucket flexItem">
+							<span class="waypoint"></span>
+						</div>
+					</div>
+				</div> <!-- end mini map region -->
+				
+				<div class="one columns endpoint flexCol finalPoint" id="final-point"> <!-- area for ending location icon -->	
+					<span class="icon iconEndpoint end" id="waypoint-end"></span>
+				</div> <!-- end final location area -->
+			
+			</div> <!-- end waypoint bar -->
+			
+			<div class="twelve columns flexRow instructionsBar" id="instructions-bar"> <!-- holds manuever icon, directions -->
+				
+				<div class="two columns flexCol maneuverIcon" id="maneuver-icon"> <!-- display maneuver image (r/l/etc) -->			
+				</div> <!-- end maneuver image -->
+				
+				<div class="eight columns flexCol instructionsText" id="instructions"> <!-- display navigation instructions -->		
+				</div> <!-- end nav instructions -->
+				
+				<div class="two columns flexCol navBtn" id="nav-btn"> <!-- call to action / prompt button -->
+					
+				</div> <!-- end prompt button -->
+							
+			</div> <!-- end directions bar -->
+			
+		</div> <!-- end footer tools -->
+		
+		<div class="twelve columns slideMenu" id="slide-menu"> <!-- discover tab pane -->
+			<ul class="menuOptions flexCol ten columns" id="menu-options">
+				<li class="opt ten columns flexCol" id='go-discover'>Discover</li>
+				<li class="opt ten columns flexCol">Account</li>
+				<li class="opt ten columns flexCol">Add Home</li>
+				<li class="opt ten columns flexCol">Add Work</li>
+				<li class="opt ten columns flexCol">Add Favorite</li>
+				<li class="opt ten columns flexCol">Preferences</li>
+			</ul>
+			<ul class="discoverOptions flexRow ten columns" id="discover-options">
+				<li class="opt twelve columns flexRow">
+					<span class="icon iconDiscover four column fa fa-car" id="cat-rest"></span>
+					<span class="icon iconDiscover four columns fa fa-coffee" id="cat-coffee"></span>
+				</li>
+				<li class="labels twelve columns flexRow">
+					<label class="four columns"><span>Rest Stops</span></label>
+					<label class="four columns">Coffee</label>
+				</li>
+				<li class="opt twelve columns flexRow">
+					<span class="icon iconDiscover vehicle four column fa fa-paw" id="cat-rec"></span>
+					<span class="icon iconDiscover vehicle four column fa fa-cutlery" id="cat-food"></span>
+				</li>
+				<li class="labels twelve columns flexRow">
+					<label class="four columns">Recreation</label>
+					<label class="four columns">Food</label>
+				</li>
+				<li class="opt twelve columns flexRow">
+					<span class="icon iconDiscover vehicle four column fa fa-beer" id="cat-bars"></span>
+					<span class="icon iconDiscover vehicle four column fa fa-money" id="cat-shop"></span>
+				</li>
+				<li class="labels twelve columns flexRow">
+					<label class="four columns">Over 21</label>
+					<label class="four columns">Shopping</label>
+				</li>
+			</ul>
+		</div> <!-- end discover tab -->
+		
+		
+	</div> <!-- end app container -->
+	<script>
+		setTimeout(function() {
+			var dock = document.getElementById('dock');
+			dock.classList.add('expand');
+			setTimeout(function() {
+				dock.classList.add('twelve');
+				dock.classList.add('columns');
+			}, 2000);
+		}, 1000);
+		var discBtn = document.getElementById('go-discover');
+		var discOpts = document.getElementById('discover-options');
+		var menuBtn = document.getElementById('menu-frame');
+		var menu = document.getElementById('slide-menu');
+		var menuOpts = document.getElementById('menu-options');
+		menuBtn.addEventListener('click', function() {
+			menu.classList.toggle('open');
+			if (menuOpts.classList.contains('active')) {
+				menuOpts.classList.remove('active');
+			}
+			else if (!discOpts.classList.contains('active')) {
+				setTimeout(function() {
+					menuOpts.classList.add('active');
+				}, 200);
+			}
+			if (discOpts.classList.contains('active')) {
+				discOpts.classList.remove('active');	
+			}
+		});
+		discBtn.addEventListener('click', function() {
+			menuOpts.classList.remove('active');
+			discOpts.classList.add('active');
+		});
+		var searchbox = document.getElementById('place-input');
+		var categories = ['cat-rest', 'cat-coffee', 'cat-food', 'cat-rec', 'cat-bars', 'cat-shop'];
+		var queries = ['gas stations', 'coffee', 'restaurants', 'parks', 'bars', 'shopping'];
+		//var catIcons = document.getElementsByClassName('iconDiscover');
+		categories.forEach(catListeners);
+		
+		function catListeners(value, index) {
+			var el = document.getElementById(value);
+			el.addEventListener('click', function() {
+				searchbox.value = queries[index];
+				discOpts.classList.remove('active');
+				menuOpts.classList.remove('active');
+				menu.classList.remove('open');
+			});
+		}		
+		
+		function searchFor(term) {
+			var searchbox = document.getElementById('place-input');
+			searchbox.value = term;
+		}
+			</script>
+	<!--<script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkTGzpRAJK24gDluEDfL_WFOOEC6r8xjY&libraries=places&callback=initMap">
     </script>
-    <script src="js/UIscript.js"></script>
-    <script src="js/mapstyles.js"></script>
-	<script src="js/scripts.js"></script>
-	<script>
-	// target elements with the "draggable" class
-	interact('.draggable').draggable({
-	// enable inertial throwing
-		inertia: true,
-		// keep the element within the area of it's parent
-		restrict: {
-			restriction: '#waypoint-grid',
-			endOnly: true,
-			elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
-		},
-		// enable autoScroll
-		autoScroll: true,
-		
-		// call this function on every dragmove event
-		onmove: dragMoveListener,
-		// call this function on every dragend event
-		/*
-		onend: function (event) {
-		};
-		*/
-	});
-	
-	function dragMoveListener (event) {
-		var target = event.target,
-		// keep the dragged position in the data-x/data-y attributes
-		x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
-		y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
-		
-		// translate the element
-		target.style.webkitTransform =
-		target.style.transform =
-		'translate(' + x + 'px, ' + y + 'px)'
-		
-		// update the posiion attributes
-		target.setAttribute('data-x', x);
-		target.setAttribute('data-y', y);
-	
-	};
-	
-	// this is used later in the resizing and gesture demos
-	window.dragMoveListener = dragMoveListener;
-	
-	/* The dragging code for '.draggable' from the demo above
-	* applies to this demo as well so it doesn't have to be repeated. */
-	
-	// enable draggables to be dropped into this
-	interact('.dropzone').dropzone({
-		// only accept elements matching this CSS selector
-		accept: '#yes-drop',
-		// Require a 75% element overlap for a drop to be possible
-		overlap: 0.75,
-		// listen for drop related events:
-		ondropactivate: function (event) {
-			// add active dropzone feedback
-			event.target.classList.add('drop-active');
-		},
-		ondragenter: function (event) {
-			var draggableElement = event.relatedTarget,
-			dropzoneElement = event.target;
-			
-			// feedback the possibility of a drop
-			dropzoneElement.classList.add('drop-target');
-			draggableElement.classList.add('can-drop');
-			draggableElement.textContent = 'Dragged in';
-		},
-		ondragleave: function (event) {
-			// remove the drop feedback style
-			event.target.classList.remove('drop-target');
-			event.relatedTarget.classList.remove('can-drop');
-			event.relatedTarget.textContent = 'Dragged out';
-		},
-		ondrop: function (event) {
-			event.relatedTarget.textContent = 'Dropped';
-		},
-		ondropdeactivate: function (event) {
-			// remove active dropzone feedback
-			event.target.classList.remove('drop-active');
-			event.target.classList.remove('drop-target');
-		}
-	});	
-	</script>
+    <script src="js/vendor/jquery.min.js"></script>
+    <script src="js/vendor/hammer.min.js"></script>
+	<script src="js/script.js"></script>-->
 </body>
 </html>

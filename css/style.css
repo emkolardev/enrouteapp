@@ -1,0 +1,661 @@
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  align-content: stretch;
+}
+
+.row.fill {
+  justify-content: stretch;
+}
+
+.rowreverse {
+  flex-direction: row-reverse;
+}
+
+.column, .columns {
+  margin: 0 auto;
+  height: 100%;
+}
+
+.column.one, .columns.one {
+  width: calc(100% / 12);
+}
+
+.column.two, .columns.two {
+  width: calc((100% / 12) * 2);
+}
+
+.column.three, .columns.three {
+  width: calc((100% / 12) * $numCols);
+  max-width: calc((100% / 12) * $numCols);
+}
+
+.column.four, .columns.four {
+  width: calc((100% / 12) * $numCols);
+  max-width: calc((100% / 12) * $numCols);
+}
+
+.column.five, .columns.five {
+  width: calc((100% / 12) * $numCols);
+  max-width: calc((100% / 12) * $numCols);
+}
+
+.column.six, .columns.six {
+  width: calc((100% / 12) * $numCols);
+  max-width: calc((100% / 12) * $numCols);
+}
+
+.column.seven, .columns.seven {
+  width: calc((100% / 12) * $numCols);
+  max-width: calc((100% / 12) * $numCols);
+}
+
+.column.eight, .columns.eight {
+  width: calc((100% / 12) * $numCols);
+  max-width: calc((100% / 12) * $numCols);
+}
+
+.column.nine, .columns.nine {
+  width: calc((100% / 12) * $numCols);
+  max-width: calc((100% / 12) * $numCols);
+}
+
+.column.ten, .columns.ten {
+  width: calc((100% / 12) * $numCols);
+  max-width: calc((100% / 12) * $numCols);
+}
+
+.column.eleven, .columns.eleven {
+  width: calc((100% / 12) * $numCols);
+  max-width: calc((100% / 12) * $numCols);
+}
+
+.column.twelve, .columns.twelve {
+  width: calc((100% / 12) * $numCols);
+  max-width: calc((100% / 12) * $numCols);
+  min-width: 100%;
+}
+
+.column.fourth, .columns.fourth {
+  width: 25%;
+}
+
+.column.third, .columns.third {
+  width: calc(100% / 3);
+}
+
+.column.half, .columns.half {
+  width: 50%;
+}
+
+.column.two-thirds, .columns.two-thirds {
+  width: calc((100% / 3) * 2);
+}
+
+.column.three-quarters, .columns.three-quarters {
+  width: 75%;
+}
+
+.column.down, .columns.down {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  align-content: stretch;
+}
+
+.column.down.stretch, .columns.down.stretch {
+  justify-content: stretch;
+}
+
+.column.down.reverse, .columns.down.reverse {
+  flex-direction: column-reverse;
+}
+
+.grow {
+  order: auto;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: auto;
+  align-self: auto;
+}
+
+.grow.x1 {
+  flex-grow: 1;
+}
+
+.grow.x2 {
+  flex-grow: 2;
+}
+
+.grow.x3 {
+  flex-grow: 3;
+}
+
+.grow.x4 {
+  flex-grow: 4;
+}
+
+.grow.x5 {
+  flex-grow: 5;
+}
+
+.grow.x6 {
+  flex-grow: 6;
+}
+
+.grow.x7 {
+  flex-grow: 7;
+}
+
+.grow.x8 {
+  flex-grow: 8;
+}
+
+.grow.stretched {
+  align-self: stretch;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  max-width: 100%;
+  max-height: 100vh;
+  background: #222;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+.app {
+  width: 400px;
+  max-width: 100%;
+  height: 100vh;
+  max-height: 750px;
+  overflow: hidden;
+  position: relative;
+  margin: 0 auto;
+  padding: 0;
+  background-color: #dc3232;
+}
+
+.column, .columns {
+  margin: 0 auto;
+  height: 100%;
+}
+
+.column.one, .columns.one {
+  width: calc(100% / 12);
+}
+
+.column.two, .columns.two {
+  width: calc((100% / 12) * 2);
+}
+
+.column.three, .columns.three {
+  width: calc((100% / 12) * 3);
+}
+
+.column.four, .columns.four {
+  width: calc((100% / 12) * 4);
+}
+
+.column.five, .columns.five {
+  width: calc((100% / 12) * 5);
+}
+
+.column.six, .columns.six {
+  width: calc((100% / 12) * 6);
+}
+
+.column.seven, .columns.seven {
+  width: calc((100% / 12) * 7);
+}
+
+.column.eight, .columns.eight {
+  width: calc((100% / 12) * 8);
+}
+
+.column.nine, .columns.nine {
+  width: calc((100% / 12) * 9);
+}
+
+.column.ten, .columns.ten {
+  width: calc((100% / 12) * 10);
+}
+
+.column.eleven, .columns.eleven {
+  width: calc((100% / 12) * 11);
+}
+
+.column.twelve, .columns.twelve {
+  width: 100%;
+}
+
+.column.fourth, .columns.fourth {
+  width: 25%;
+}
+
+.column.third, .columns.third {
+  width: calc(100% / 3);
+}
+
+.column.half, .columns.half {
+  width: 50%;
+}
+
+.column.two-thirds, .columns.two-thirds {
+  width: calc((100% / 3) * 2);
+}
+
+.column.three-quarters, .columns.three-quarters {
+  width: 75%;
+}
+
+.flexRow {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: stretch;
+  align-content: stretch;
+}
+
+.flexRow.reverse {
+  flex-direction: row-reverse;
+}
+
+.flexCol {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  align-content: center;
+  justify-content: center;
+}
+
+.flexCol.reverse {
+  flex-direction: column-reverse;
+}
+
+.flexItem {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: auto;
+  align-self: auto;
+}
+
+.flexItem .x2 {
+  flex-grow: 2;
+}
+
+.flexItem .x3 {
+  flex-grow: 3;
+}
+
+.flexItem .x4 {
+  flex-grow: 4;
+}
+
+.flexItem .x5 {
+  flex-grow: 5;
+}
+
+.flexItem .x6 {
+  flex-grow: 6;
+}
+
+.flexItem .x7 {
+  flex-grow: 7;
+}
+
+.flexItem .x8 {
+  flex-grow: 8;
+}
+
+#map {
+  position: absolute;
+  height: 100vh;
+  max-height: 100%;
+  width: 100%;
+  max-width: 400px;
+  background-image: url("../images/map.png");
+  background-size: 400px 750px;
+}
+
+.overMap {
+  position: absolute;
+}
+
+.overMap.topToolbar {
+  height: 40px;
+  z-index: 110;
+  top: 0;
+}
+
+.overMap.btmToolbar {
+  height: 130px;
+  bottom: 0;
+}
+
+.waypointBar {
+  height: 30px;
+  background-color: rgba(0, 0, 0, 0.85);
+}
+
+.miniMap {
+  /*
+	background-color: $alphaBg;
+	background-image: url('..images/path-icon.png');
+	background-size: 300px 3px;
+	background-position: center;
+	background-repeat: no-repeat;
+*/
+}
+
+.instructionsBar {
+  height: 100px;
+  background-color: rgba(0, 0, 0, 0.85);
+}
+
+.toggleMenu {
+  padding-left: 3px;
+}
+
+.searchBar {
+  padding: 5px 0;
+}
+
+.searchBar .placesInput {
+  font-size: 16px;
+  padding-left: 5px;
+}
+
+.menuFrame {
+  height: 26px;
+  width: 26px;
+  border-radius: 2px;
+  background-color: rgba(0, 0, 0, 0.85);
+  cursor: pointer;
+}
+
+.dock {
+  width: 1px;
+}
+
+.dock.expand {
+  height: 16px;
+  background-image: url("../images/path-icon.png");
+  background-size: 100% 3px;
+  background-position: center;
+  background-repeat: no-repeat;
+  animation-name: path;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: 2;
+  width: 100%;
+}
+
+.pointBucket {
+  width: 16px;
+  height: 100%;
+}
+
+.waypoint {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #28AF7D;
+  margin: 0 auto;
+}
+
+/*
+.path {
+	border: 1px solid white;
+	width: calc((100% / 12) * 10);
+	margin: 0 auto;
+	position: absolute;
+	margin-top: 14px;
+}
+*/
+.icon {
+  display: block;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 16px 16px;
+}
+
+.icon.iconMenu {
+  width: 26px;
+  height: 26px;
+  background-image: url("../images/menu-icon.png");
+}
+
+.icon.iconLocation {
+  height: 20px;
+  background-image: url("../images/location-icon.png");
+  cursor: pointer;
+  background-size: 18px 18px;
+}
+
+.icon.iconEndpoint {
+  background-color: #2a8ec8;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  margin: 0 auto;
+}
+
+.icon.iconEndpoint.end {
+  background-color: #28AF7D;
+}
+
+.icon.iconCar {
+  width: 100px;
+  height: 100px;
+  background-image: url("../images/car-outline-small.png");
+  background-size: 100px 100px;
+}
+
+.icon.iconDiscover {
+  height: 60px;
+  border-radius: 2px;
+  background-position: center top;
+  text-align: center;
+  color: white;
+  padding-top: 15px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.icon.iconDiscover.fa {
+  font-size: 32px;
+}
+
+.icon.iconDiscover.fa-car {
+  font-size: 28px;
+  background-color: #f2784b;
+}
+
+.icon.iconDiscover.fa-paw {
+  background-color: #00b16a;
+}
+
+.icon.iconDiscover.fa-cutlery {
+  background-color: #f4b350;
+}
+
+.icon.iconDiscover.fa-money {
+  background-color: #e26a6a;
+}
+
+.icon.iconDiscover.fa-coffee {
+  background-color: #674172;
+}
+
+.icon.iconDiscover.fa-beer {
+  background-color: #3498db;
+}
+
+.slideMenu {
+  position: absolute;
+  height: 0px;
+  background-color: rgba(0, 0, 0, 0.85);
+  z-index: 101;
+}
+
+.slideMenu.open {
+  animation: slideDown 0.2s;
+  animation-timing-function: linear;
+  animation-direction: normal;
+  height: 380px;
+}
+
+.slideMenu .menuOptions {
+  display: none;
+}
+
+.slideMenu .menuOptions.active {
+  display: initial;
+  color: #DDD;
+  list-style: none;
+  text-decoration: none;
+  padding: 40px 0 0 0;
+}
+
+.slideMenu .menuOptions.active .opt {
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  align-items: center;
+  cursor: pointer;
+  height: 55px;
+  font-weight: 300;
+  letter-spacing: 0.03em;
+}
+
+.slideMenu .menuOptions.active .opt:hover {
+  background-color: #282828;
+}
+
+.slideMenu .menuOptions.active .opt:last-child {
+  border-bottom: none;
+}
+
+.slideMenu .menuOptions.active .opt:first-child {
+  margin-top: 45px;
+}
+
+.slideMenu .menuOptions #go-discover {
+  color: #28AF7D;
+}
+
+.slideMenu .discoverOptions {
+  display: none;
+  max-height: 300px;
+}
+
+.slideMenu .discoverOptions.active {
+  display: initial;
+  list-style: none;
+  text-decoration: none;
+  max-height: 300px;
+}
+
+.slideMenu .discoverOptions.active .opt {
+  height: 80px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.slideMenu .discoverOptions.active .opt:first-child {
+  padding-top: 30px;
+  height: 110px;
+}
+
+.slideMenu .discoverOptions .labels {
+  text-align: center;
+  color: white;
+  height: 20px;
+  max-height: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-bottom: 15px;
+  font-size: 16px;
+  font-weight: 300;
+  margin-top: -10px;
+}
+
+@-webkit-keyframes path {
+  0%
+{
+    width: 1px;
+  }
+  100%
+{
+    width: 100%;
+  }
+}
+
+@-moz-keyframes path {
+  0%
+{
+    width: 1px;
+  }
+  100%
+{
+    width: 100%;
+  }
+}
+
+@keyframes path {
+  0%
+{
+    width: 1px;
+  }
+  100%
+{
+    width: 100%;
+  }
+}
+
+@-webkit-keyframes slideDown {
+  0%
+{
+    height: 0px;
+  }
+  100%
+{
+    height: 380px;
+  }
+}
+
+@-moz-keyframes slideDown {
+  0%
+{
+    height: 0px;
+  }
+  100%
+{
+    height: 380px;
+  }
+}
+
+@keyframes slideDown {
+  0%
+{
+    height: 0px;
+  }
+  100%
+{
+    height: 380px;
+  }
+}
+
+/*# sourceMappingURL=style.map */

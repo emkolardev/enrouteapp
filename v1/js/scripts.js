@@ -247,7 +247,7 @@ function calcRouteForTime(st, fin, f, x) {
 	directionsService.route(request, function(result, status) {
 	    if (status == google.maps.DirectionsStatus.OK) {
 	      	console.log(result);
-	      	time = result.routes[0].legs[0].duration.text;
+	      	time = result.routes[0].legs[0].duration.value / 60;
 	      	console.log(time);
 	      	if (f != null) {
 		      	f();
@@ -319,14 +319,14 @@ function geocodeGetTime(geocoder, map, infowindow, place) {
 						//wayptsPreliminary = waypts;
 						wayptsPreliminary.push({ location: place.formatted_address, stopover: true });
 						calcRouteForTime(results[0].formatted_address, place.formatted_address, null, function() {
-							document.querySelector('#instruct').innerHTML = '<span style="font-size: 12px">Add This Pitstop?</span><br />' + place.name + '<br /><span style="font-size: 14px">' + time + '</span>';
+							document.querySelector('#instruct').innerHTML = '<span style="font-size: 12px">Add This Pitstop?</span><br />' + place.name + '<br /><span style="font-size: 14px">Adds ' + (time * 2) + ' minutes</span>';
 						});
 						getNext.classList.add('confirm');
 						return;
 					}
 					else {
 						calcRouteForTime(results[0].formatted_address, place.formatted_address, function() { 
-							document.querySelector('#instruct').innerHTML = '<span style="font-size: 12px">Get Directions To:</span><br />' + place.name + '<br /><span style="font-size: 14px">' + time + '</span>'; 
+							document.querySelector('#instruct').innerHTML = '<span style="font-size: 12px">Get Directions To:</span><br />' + place.name + '<br /><span style="font-size: 14px">' + time + ' minutes</span>'; 
 							finalDestination = place;
 						}, null);
 					}

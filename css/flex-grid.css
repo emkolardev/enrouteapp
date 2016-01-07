@@ -1,0 +1,161 @@
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  align-content: stretch;
+}
+
+.row.fill {
+  justify-content: stretch;
+}
+
+.rowreverse {
+  flex-direction: row-reverse;
+}
+
+.column, .columns {
+  margin: 0 auto;
+  height: 100%;
+}
+
+.column.one, .columns.one {
+  width: calc(100% / 12);
+}
+
+.column.two, .columns.two {
+  width: calc((100% / 12) * 2);
+}
+
+.column.three, .columns.three {
+  width: calc((100% / 12) * $numCols);
+  max-width: calc((100% / 12) * $numCols);
+}
+
+.column.four, .columns.four {
+  width: calc((100% / 12) * $numCols);
+  max-width: calc((100% / 12) * $numCols);
+}
+
+.column.five, .columns.five {
+  width: calc((100% / 12) * $numCols);
+  max-width: calc((100% / 12) * $numCols);
+}
+
+.column.six, .columns.six {
+  width: calc((100% / 12) * $numCols);
+  max-width: calc((100% / 12) * $numCols);
+}
+
+.column.seven, .columns.seven {
+  width: calc((100% / 12) * $numCols);
+  max-width: calc((100% / 12) * $numCols);
+}
+
+.column.eight, .columns.eight {
+  width: calc((100% / 12) * $numCols);
+  max-width: calc((100% / 12) * $numCols);
+}
+
+.column.nine, .columns.nine {
+  width: calc((100% / 12) * $numCols);
+  max-width: calc((100% / 12) * $numCols);
+}
+
+.column.ten, .columns.ten {
+  width: calc((100% / 12) * $numCols);
+  max-width: calc((100% / 12) * $numCols);
+}
+
+.column.eleven, .columns.eleven {
+  width: calc((100% / 12) * $numCols);
+  max-width: calc((100% / 12) * $numCols);
+}
+
+.column.twelve, .columns.twelve {
+  width: calc((100% / 12) * $numCols);
+  max-width: calc((100% / 12) * $numCols);
+  min-width: 100%;
+}
+
+.column.fourth, .columns.fourth {
+  width: 25%;
+}
+
+.column.third, .columns.third {
+  width: calc(100% / 3);
+}
+
+.column.half, .columns.half {
+  width: 50%;
+}
+
+.column.two-thirds, .columns.two-thirds {
+  width: calc((100% / 3) * 2);
+}
+
+.column.three-quarters, .columns.three-quarters {
+  width: 75%;
+}
+
+.column.down, .columns.down {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  align-content: stretch;
+}
+
+.column.down.stretch, .columns.down.stretch {
+  justify-content: stretch;
+}
+
+.column.down.reverse, .columns.down.reverse {
+  flex-direction: column-reverse;
+}
+
+.grow {
+  order: auto;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: auto;
+  align-self: auto;
+}
+
+.grow.x1 {
+  flex-grow: 1;
+}
+
+.grow.x2 {
+  flex-grow: 2;
+}
+
+.grow.x3 {
+  flex-grow: 3;
+}
+
+.grow.x4 {
+  flex-grow: 4;
+}
+
+.grow.x5 {
+  flex-grow: 5;
+}
+
+.grow.x6 {
+  flex-grow: 6;
+}
+
+.grow.x7 {
+  flex-grow: 7;
+}
+
+.grow.x8 {
+  flex-grow: 8;
+}
+
+.grow.stretched {
+  align-self: stretch;
+}
+
+/*# sourceMappingURL=flex-grid.map */
