@@ -1,0 +1,107 @@
+.column, .columns {
+	margin: 0 auto;
+	height: 100%;
+	&.one {
+		width: calc(100% / 12);
+	}
+	&.two {
+		width: calc((100% / 12) * 2);
+	}
+	&.three {
+		width: calc((100% / 12) * 3);
+	}
+	&.four {
+		width: calc((100% / 12) * 4);
+	}
+	&.five {
+		width: calc((100% / 12) * 5);
+	}
+	&.six {
+		width: calc((100% / 12) * 6);
+	}
+	&.seven {
+		width: calc((100% / 12) * 7);
+	}
+	&.eight {
+		width: calc((100% / 12) * 8);
+	}
+	&.nine {
+		width: calc((100% / 12) * 9);
+	}
+	&.ten {
+		width: calc((100% / 12) * 10);
+	}
+	&.eleven {
+		width: calc((100% / 12) * 11);
+	}
+	&.twelve {
+		width: 100%;
+	}
+	&.fourth {
+		width: 25%;
+	}
+	&.third {
+		width: calc(100% / 3);
+	}
+	&.half {
+		width: 50%;
+	}
+	&.two-thirds {
+		width: calc((100% / 3) * 2);
+	}
+	&.three-quarters {
+		width: 75%;
+	}
+}
+
+.flexRow {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: stretch;
+	align-content: stretch;
+	&.reverse {
+		flex-direction: row-reverse;
+	}
+}
+
+.flexCol {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	align-items: flex-start;
+	align-content: center;
+	justify-content: center;
+	&.reverse {
+		flex-direction: column-reverse;
+	}
+}
+
+.flexItem {
+	flex-grow: 1;
+	flex-shrink: 1;
+	flex-basis: auto;
+	align-self: auto;
+	.x2 {
+		flex-grow: 2;
+	}
+	.x3 {
+		flex-grow: 3;
+	}
+	.x4 {
+		flex-grow: 4;
+	}
+	.x5 {
+		flex-grow: 5;
+	}
+	.x6 {
+		flex-grow: 6;
+	}
+	.x7 {
+		flex-grow: 7;
+	}
+	.x8 {
+		flex-grow: 8;
+	}
+}

@@ -1,7 +1,19 @@
-$testBg: rgb(220, 50, 50);
-$testBg2: rgb(50, 220, 50);
-$testBg3: rgb(50, 50, 220);
-$bodyBg: #222;
-$alphaBg: rgba(0,0,0,0.8);
+$menuHeight: 380px;
 
-
+@mixin animate($name, $duration, $direction: normal, $iteration: 1, $timing: ease-out) {
+	-moz-animation: $name;
+	-moz-animation-duration: $duration;
+	-moz-animation-direction: $direction;
+	-moz-animation-iteration-count: $iteration;
+	-moz-animation-timing-function: $timing;
+	-webkit-animation: $name;
+	-webkit-animation-duration: $duration;
+	-webkit-animation-direction: $direction;
+	-webkit-animation-iteration-count: $iteration;
+	-webkit-animation-timing-function: $timing;
+	animation: $name;
+	animation-duration: $duration;
+	animation-direction: $direction;
+	animation-iteration-count: $iteration;
+	animation-timing-function: $timing;
+}

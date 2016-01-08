@@ -7,8 +7,6 @@
 	<title>EnRoute</title>
 	<meta name="author" content="Emily Kolar">
 	<link rel="stylesheet" href="css/vendor/normalize.css" type="text/css">
-	<!--<link rel="stylesheet" href="css/skeleton-modified.css" type="text/css">-->
-	<!--<link rel="stylesheet" href="css/vendor/animate-scss/animate.css" type="text/css">-->
 	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 	<link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="css/style.css" type="text/css">
@@ -16,169 +14,104 @@
 <body>
 	
 	<div class="app" id="app"> <!-- app container (restrict size) -->
+	
+		<!-- map stuff, menu, get-location icon -->
+		<div class="gmap" id="map">	
+		</div>
+		<div class="one column flexCol toggleMenu" id="toggle-menu">
+			<div class="menuFrame flexCol" id="menu-frame">
+				<span class="icon iconMenu" id="icon-menu"></span>
+			</div>
+		</div>
+		<div class="locationBtn" id="location-btn">
+				<span class="icon iconLocation" id="icon-location"></span>		
+		</div>
+		<input type="text" class="ten columns placesInput" id="place-input" placeholder="Where to?"/> <!-- places search box -->
+		<!-- end map stuff -->
 
-
-
-
-		<div class="gmap" id="map"> <!-- google maps object -->		
-		</div> <!-- end google maps object -->
-		
-
-
-		<div class="twelve columns flexRow overMap topToolbar" id="top-toolbar"> <!-- all the header-region tools -->
-		
-			<div class="one column flexCol toggleMenu" id="toggle-menu"> <!-- stack menu icon -->
-				<div class="menuFrame flexCol" id="menu-frame">
-					<span class="icon iconMenu" id="icon-menu"></span>
-				</div>
-			</div> <!-- end menu icon --> 
-			
-			<div class="ten columns searchBar" id="places-search"> <!-- holds the places search -->	
-				<input type="text" class="twelve columns placesInput" id="place-input" placeholder="Where to?"/>			
-			</div> <!-- end places search area -->
-			
-			<div class="one column flexCol locationBtn" id="location-btn"> <!-- location icon to get current -->	
-				<span class="twelve columns icon iconLocation" id="icon-location"></span>		
-			</div> <!-- end get current location -->
-		
-		</div> <!-- end header tools -->
-
-
-		
-		<div class="twelve columns overMap btmToolbar" id="btm-toolber"> <!-- all the footer-region tools -->
-			
-			<div class="twelve columns flexRow waypointBar" id="waypoint-bar"> <!-- holds waypoint dots/anims -->
-			
-				<div class="one columns flexCol endpoint startPoint" id="endpoint"> <!-- area for starting location icon -->	
+		<!-- all the footer-region tools -->
+		<div class="twelve columns overMap btmToolbar" id="btm-toolbar">
+			<!-- holds waypoint dots/anims -->
+			<div class="twelve columns flexRow waypointBar" id="waypoint-bar"> 
+				<!-- area for starting location icon -->
+				<div class="one columns flexCol endpoint startPoint" id="endpoint"> 	
 					<span class="icon iconEndpoint start" id="waypoint-start"></span>
 				</div> <!-- end start location area -->
-				<div class="ten columns flexCol miniMap" id="mini-map"> <!-- mini map region -->	
+				 <!-- mini map region -->
+				<div class="ten columns flexCol" id="mini-map">	
 					<div class="flexRow dock" id="dock">
 						<div class="pointBucket flexItem">
 							<span class="waypoint"></span>
 						</div>
 					</div>
 				</div> <!-- end mini map region -->
-				
-				<div class="one columns endpoint flexCol finalPoint" id="final-point"> <!-- area for ending location icon -->	
+				<!-- area for ending location icon -->
+				<div class="one columns endpoint flexCol finalPoint" id="final-point">	
 					<span class="icon iconEndpoint end" id="waypoint-end"></span>
 				</div> <!-- end final location area -->
-			
 			</div> <!-- end waypoint bar -->
 			
-			<div class="twelve columns flexRow instructionsBar" id="instructions-bar"> <!-- holds manuever icon, directions -->
-				
-				<div class="two columns flexCol maneuverIcon" id="maneuver-icon"> <!-- display maneuver image (r/l/etc) -->			
-				</div> <!-- end maneuver image -->
-				
-				<div class="eight columns flexCol instructionsText" id="instructions"> <!-- display navigation instructions -->		
-				</div> <!-- end nav instructions -->
-				
+			 <!-- holds manuever icon, directions -->
+			<div class="twelve columns flexRow instructionsBar" id="instructions-bar">
+				<div class="two columns flexCol maneuverIcon" id="maneuver-icon">			
+				</div> 				
+				<div class="eight columns flexCol instructionsText" id="instructions">	
+				</div> 
 				<div class="two columns flexCol navBtn" id="nav-btn"> <!-- call to action / prompt button -->
-					
 				</div> <!-- end prompt button -->
-							
 			</div> <!-- end directions bar -->
 			
 		</div> <!-- end footer tools -->
 		
-		<div class="twelve columns slideMenu" id="slide-menu"> <!-- discover tab pane -->
+		<div class="twelve columns slideMenu" id="slide-menu">
+			<!-- regular menu pane -->			
 			<ul class="menuOptions flexCol ten columns" id="menu-options">
 				<li class="opt ten columns flexCol" id='go-discover'>Discover</li>
 				<li class="opt ten columns flexCol">Account</li>
 				<li class="opt ten columns flexCol">Add Home</li>
 				<li class="opt ten columns flexCol">Add Work</li>
 				<li class="opt ten columns flexCol">Add Favorite</li>
-				<li class="opt ten columns flexCol">Preferences</li>
+				<li class="opt ten columns flexCol" id="only-open">Only Show Open</li>
 			</ul>
+			<!-- discover pane -->
 			<ul class="discoverOptions flexRow ten columns" id="discover-options">
 				<li class="opt twelve columns flexRow">
-					<span class="icon iconDiscover four column fa fa-car" id="cat-rest"></span>
-					<span class="icon iconDiscover four columns fa fa-coffee" id="cat-coffee"></span>
+					<span class="icon iconDiscover four column fa fa-car" id="rest_stops"></span>
+					<span class="icon iconDiscover four columns fa fa-coffee" id="coffee"></span>
 				</li>
 				<li class="labels twelve columns flexRow">
 					<label class="four columns"><span>Rest Stops</span></label>
 					<label class="four columns">Coffee</label>
 				</li>
 				<li class="opt twelve columns flexRow">
-					<span class="icon iconDiscover vehicle four column fa fa-paw" id="cat-rec"></span>
-					<span class="icon iconDiscover vehicle four column fa fa-cutlery" id="cat-food"></span>
+					<span class="icon iconDiscover vehicle four column fa fa-paw" id="recreation"></span>
+					<span class="icon iconDiscover vehicle four column fa fa-cutlery" id="food"></span>
 				</li>
 				<li class="labels twelve columns flexRow">
 					<label class="four columns">Recreation</label>
 					<label class="four columns">Food</label>
 				</li>
 				<li class="opt twelve columns flexRow">
-					<span class="icon iconDiscover vehicle four column fa fa-beer" id="cat-bars"></span>
-					<span class="icon iconDiscover vehicle four column fa fa-money" id="cat-shop"></span>
+					<span class="icon iconDiscover vehicle four column fa fa-beer" id="over_21"></span>
+					<span class="icon iconDiscover vehicle four column fa fa-money" id="shopping"></span>
 				</li>
 				<li class="labels twelve columns flexRow">
 					<label class="four columns">Over 21</label>
 					<label class="four columns">Shopping</label>
 				</li>
 			</ul>
-		</div> <!-- end discover tab -->
+		</div> <!-- end menu -->
 		
 		
 	</div> <!-- end app container -->
 	<script>
-		setTimeout(function() {
-			var dock = document.getElementById('dock');
-			dock.classList.add('expand');
-			setTimeout(function() {
-				dock.classList.add('twelve');
-				dock.classList.add('columns');
-			}, 2000);
-		}, 1000);
-		var discBtn = document.getElementById('go-discover');
-		var discOpts = document.getElementById('discover-options');
-		var menuBtn = document.getElementById('menu-frame');
-		var menu = document.getElementById('slide-menu');
-		var menuOpts = document.getElementById('menu-options');
-		menuBtn.addEventListener('click', function() {
-			menu.classList.toggle('open');
-			if (menuOpts.classList.contains('active')) {
-				menuOpts.classList.remove('active');
-			}
-			else if (!discOpts.classList.contains('active')) {
-				setTimeout(function() {
-					menuOpts.classList.add('active');
-				}, 200);
-			}
-			if (discOpts.classList.contains('active')) {
-				discOpts.classList.remove('active');	
-			}
-		});
-		discBtn.addEventListener('click', function() {
-			menuOpts.classList.remove('active');
-			discOpts.classList.add('active');
-		});
-		var searchbox = document.getElementById('place-input');
-		var categories = ['cat-rest', 'cat-coffee', 'cat-food', 'cat-rec', 'cat-bars', 'cat-shop'];
-		var queries = ['gas stations', 'coffee', 'restaurants', 'parks', 'bars', 'shopping'];
-		//var catIcons = document.getElementsByClassName('iconDiscover');
-		categories.forEach(catListeners);
-		
-		function catListeners(value, index) {
-			var el = document.getElementById(value);
-			el.addEventListener('click', function() {
-				searchbox.value = queries[index];
-				discOpts.classList.remove('active');
-				menuOpts.classList.remove('active');
-				menu.classList.remove('open');
-			});
-		}		
-		
-		function searchFor(term) {
-			var searchbox = document.getElementById('place-input');
-			searchbox.value = term;
-		}
-			</script>
-	<!--<script async defer
+	</script>
+<!-- 	<script src="js/testcode.js"></script> -->
+	<script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkTGzpRAJK24gDluEDfL_WFOOEC6r8xjY&libraries=places&callback=initMap">
     </script>
-    <script src="js/vendor/jquery.min.js"></script>
-    <script src="js/vendor/hammer.min.js"></script>
-	<script src="js/script.js"></script>-->
+    <!--<script src="js/vendor/jquery.min.js"></script>
+    <script src="js/vendor/hammer.min.js"></script>-->
+	<script src="js/script.js"></script>
 </body>
 </html>

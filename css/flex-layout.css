@@ -1,0 +1,135 @@
+.column, .columns {
+  margin: 0 auto;
+  height: 100%;
+}
+
+.column.one, .columns.one {
+  width: calc(100% / 12);
+}
+
+.column.two, .columns.two {
+  width: calc((100% / 12) * 2);
+}
+
+.column.three, .columns.three {
+  width: calc((100% / 12) * 3);
+}
+
+.column.four, .columns.four {
+  width: calc((100% / 12) * 4);
+}
+
+.column.five, .columns.five {
+  width: calc((100% / 12) * 5);
+}
+
+.column.six, .columns.six {
+  width: calc((100% / 12) * 6);
+}
+
+.column.seven, .columns.seven {
+  width: calc((100% / 12) * 7);
+}
+
+.column.eight, .columns.eight {
+  width: calc((100% / 12) * 8);
+}
+
+.column.nine, .columns.nine {
+  width: calc((100% / 12) * 9);
+}
+
+.column.ten, .columns.ten {
+  width: calc((100% / 12) * 10);
+}
+
+.column.eleven, .columns.eleven {
+  width: calc((100% / 12) * 11);
+}
+
+.column.twelve, .columns.twelve {
+  width: 100%;
+}
+
+.column.fourth, .columns.fourth {
+  width: 25%;
+}
+
+.column.third, .columns.third {
+  width: calc(100% / 3);
+}
+
+.column.half, .columns.half {
+  width: 50%;
+}
+
+.column.two-thirds, .columns.two-thirds {
+  width: calc((100% / 3) * 2);
+}
+
+.column.three-quarters, .columns.three-quarters {
+  width: 75%;
+}
+
+.flexRow {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: stretch;
+  align-content: stretch;
+}
+
+.flexRow.reverse {
+  flex-direction: row-reverse;
+}
+
+.flexCol {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  align-content: center;
+  justify-content: center;
+}
+
+.flexCol.reverse {
+  flex-direction: column-reverse;
+}
+
+.flexItem {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: auto;
+  align-self: auto;
+}
+
+.flexItem .x2 {
+  flex-grow: 2;
+}
+
+.flexItem .x3 {
+  flex-grow: 3;
+}
+
+.flexItem .x4 {
+  flex-grow: 4;
+}
+
+.flexItem .x5 {
+  flex-grow: 5;
+}
+
+.flexItem .x6 {
+  flex-grow: 6;
+}
+
+.flexItem .x7 {
+  flex-grow: 7;
+}
+
+.flexItem .x8 {
+  flex-grow: 8;
+}
+
+/*# sourceMappingURL=flex-layout.map */

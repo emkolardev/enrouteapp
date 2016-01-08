@@ -1,190 +1,3 @@
-.row {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  align-items: stretch;
-  align-content: stretch;
-}
-
-.row.fill {
-  justify-content: stretch;
-}
-
-.rowreverse {
-  flex-direction: row-reverse;
-}
-
-.column, .columns {
-  margin: 0 auto;
-  height: 100%;
-}
-
-.column.one, .columns.one {
-  width: calc(100% / 12);
-}
-
-.column.two, .columns.two {
-  width: calc((100% / 12) * 2);
-}
-
-.column.three, .columns.three {
-  width: calc((100% / 12) * $numCols);
-  max-width: calc((100% / 12) * $numCols);
-}
-
-.column.four, .columns.four {
-  width: calc((100% / 12) * $numCols);
-  max-width: calc((100% / 12) * $numCols);
-}
-
-.column.five, .columns.five {
-  width: calc((100% / 12) * $numCols);
-  max-width: calc((100% / 12) * $numCols);
-}
-
-.column.six, .columns.six {
-  width: calc((100% / 12) * $numCols);
-  max-width: calc((100% / 12) * $numCols);
-}
-
-.column.seven, .columns.seven {
-  width: calc((100% / 12) * $numCols);
-  max-width: calc((100% / 12) * $numCols);
-}
-
-.column.eight, .columns.eight {
-  width: calc((100% / 12) * $numCols);
-  max-width: calc((100% / 12) * $numCols);
-}
-
-.column.nine, .columns.nine {
-  width: calc((100% / 12) * $numCols);
-  max-width: calc((100% / 12) * $numCols);
-}
-
-.column.ten, .columns.ten {
-  width: calc((100% / 12) * $numCols);
-  max-width: calc((100% / 12) * $numCols);
-}
-
-.column.eleven, .columns.eleven {
-  width: calc((100% / 12) * $numCols);
-  max-width: calc((100% / 12) * $numCols);
-}
-
-.column.twelve, .columns.twelve {
-  width: calc((100% / 12) * $numCols);
-  max-width: calc((100% / 12) * $numCols);
-  min-width: 100%;
-}
-
-.column.fourth, .columns.fourth {
-  width: 25%;
-}
-
-.column.third, .columns.third {
-  width: calc(100% / 3);
-}
-
-.column.half, .columns.half {
-  width: 50%;
-}
-
-.column.two-thirds, .columns.two-thirds {
-  width: calc((100% / 3) * 2);
-}
-
-.column.three-quarters, .columns.three-quarters {
-  width: 75%;
-}
-
-.column.down, .columns.down {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  align-items: stretch;
-  align-content: stretch;
-}
-
-.column.down.stretch, .columns.down.stretch {
-  justify-content: stretch;
-}
-
-.column.down.reverse, .columns.down.reverse {
-  flex-direction: column-reverse;
-}
-
-.grow {
-  order: auto;
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: auto;
-  align-self: auto;
-}
-
-.grow.x1 {
-  flex-grow: 1;
-}
-
-.grow.x2 {
-  flex-grow: 2;
-}
-
-.grow.x3 {
-  flex-grow: 3;
-}
-
-.grow.x4 {
-  flex-grow: 4;
-}
-
-.grow.x5 {
-  flex-grow: 5;
-}
-
-.grow.x6 {
-  flex-grow: 6;
-}
-
-.grow.x7 {
-  flex-grow: 7;
-}
-
-.grow.x8 {
-  flex-grow: 8;
-}
-
-.grow.stretched {
-  align-self: stretch;
-}
-
-html {
-  box-sizing: border-box;
-}
-
-*, *:before, *:after {
-  box-sizing: inherit;
-}
-
-body {
-  max-width: 100%;
-  max-height: 100vh;
-  background: #222;
-  font-family: 'Roboto Condensed', sans-serif;
-}
-
-.app {
-  width: 400px;
-  max-width: 100%;
-  height: 100vh;
-  max-height: 750px;
-  overflow: hidden;
-  position: relative;
-  margin: 0 auto;
-  padding: 0;
-  background-color: #dc3232;
-}
-
 .column, .columns {
   margin: 0 auto;
   height: 100%;
@@ -319,44 +132,114 @@ body {
   flex-grow: 8;
 }
 
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body, html {
+  max-width: 100%;
+  max-height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background: #222;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+.app {
+  width: 100%;
+  max-width: 100%;
+  height: 100vh;
+  max-height: 100%;
+  overflow: hidden;
+  position: relative;
+  margin: 0 auto;
+  padding: 0;
+}
+
 #map {
   position: absolute;
   height: 100vh;
   max-height: 100%;
   width: 100%;
-  max-width: 400px;
-  background-image: url("../images/map.png");
-  background-size: 400px 750px;
+  max-width: 100%;
 }
 
-.overMap {
+.btmToolbar {
+  height: 0px;
+  bottom: 0;
+  z-index: 100;
   position: absolute;
 }
 
-.overMap.topToolbar {
-  height: 40px;
-  z-index: 110;
-  top: 0;
+.btmToolbar.open {
+  -moz-animation: rise;
+  -moz-animation-duration: 0.3s;
+  -moz-animation-direction: normal;
+  -moz-animation-iteration-count: 1;
+  -moz-animation-timing-function: ease-out;
+  -webkit-animation: rise;
+  -webkit-animation-duration: 0.3s;
+  -webkit-animation-direction: normal;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: ease-out;
+  animation: rise;
+  animation-duration: 0.3s;
+  animation-direction: normal;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-out;
+  height: 100px;
 }
 
-.overMap.btmToolbar {
+.btmToolbar.open.expand {
+  -moz-animation: riseAgain;
+  -moz-animation-duration: 0.2s;
+  -moz-animation-direction: normal;
+  -moz-animation-iteration-count: 1;
+  -moz-animation-timing-function: ease-out;
+  -webkit-animation: riseAgain;
+  -webkit-animation-duration: 0.2s;
+  -webkit-animation-direction: normal;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: ease-out;
+  animation: riseAgain;
+  animation-duration: 0.2s;
+  animation-direction: normal;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-out;
   height: 130px;
-  bottom: 0;
 }
 
 .waypointBar {
-  height: 30px;
+  display: none;
+  height: 0px;
   background-color: rgba(0, 0, 0, 0.85);
 }
 
-.miniMap {
-  /*
-	background-color: $alphaBg;
-	background-image: url('..images/path-icon.png');
-	background-size: 300px 3px;
-	background-position: center;
-	background-repeat: no-repeat;
-*/
+.waypointBar.open {
+  display: flex;
+  -moz-animation: dock;
+  -moz-animation-duration: 0.2s;
+  -moz-animation-direction: normal;
+  -moz-animation-iteration-count: 1;
+  -moz-animation-timing-function: ease-out;
+  -webkit-animation: dock;
+  -webkit-animation-duration: 0.2s;
+  -webkit-animation-direction: normal;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: ease-out;
+  animation: dock;
+  animation-duration: 0.2s;
+  animation-direction: normal;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-out;
+  height: 30px;
 }
 
 .instructionsBar {
@@ -364,29 +247,63 @@ body {
   background-color: rgba(0, 0, 0, 0.85);
 }
 
+.btmBarText {
+  color: #DDD;
+}
+
+.btmBarText .heading {
+  font-size: 12px;
+}
+
+.btmBarText .openNow {
+  color: #28AF7D;
+}
+
+.btmBarText .closedNow {
+  color: #d02e52;
+}
+
+.btmBarText .unavailable {
+  color: #f4b350;
+}
+
 .toggleMenu {
   padding-left: 3px;
+  margin-top: 5px;
+  height: 30px;
+  float: left;
 }
 
-.searchBar {
-  padding: 5px 0;
-}
-
-.searchBar .placesInput {
+.placesInput {
   font-size: 16px;
   padding-left: 5px;
+  height: 30px;
+  z-index: 120;
+  margin-top: 5px;
+}
+
+.locationBtn {
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+  z-index: 130;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  padding: 2px;
 }
 
 .menuFrame {
-  height: 26px;
+  height: 30px;
   width: 26px;
   border-radius: 2px;
   background-color: rgba(0, 0, 0, 0.85);
   cursor: pointer;
+  z-index: 105;
 }
 
 .dock {
-  width: 1px;
+  width: 0px;
 }
 
 .dock.expand {
@@ -395,10 +312,21 @@ body {
   background-size: 100% 3px;
   background-position: center;
   background-repeat: no-repeat;
-  animation-name: path;
-  animation-duration: 2s;
+  -moz-animation: path;
+  -moz-animation-duration: 1s;
+  -moz-animation-direction: normal;
+  -moz-animation-iteration-count: 1;
+  -moz-animation-timing-function: ease-in-out;
+  -webkit-animation: path;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-direction: normal;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: ease-in-out;
+  animation: path;
+  animation-duration: 1s;
+  animation-direction: normal;
+  animation-iteration-count: 1;
   animation-timing-function: ease-in-out;
-  animation-iteration-count: 2;
   width: 100%;
 }
 
@@ -415,15 +343,6 @@ body {
   margin: 0 auto;
 }
 
-/*
-.path {
-	border: 1px solid white;
-	width: calc((100% / 12) * 10);
-	margin: 0 auto;
-	position: absolute;
-	margin-top: 14px;
-}
-*/
 .icon {
   display: block;
   background-position: center;
@@ -438,14 +357,33 @@ body {
 }
 
 .icon.iconLocation {
-  height: 20px;
+  height: 100%;
+  width: 100%;
   background-image: url("../images/location-icon.png");
   cursor: pointer;
   background-size: 18px 18px;
+  z-index: 126;
+}
+
+.icon.iconLocation.finding {
+  -moz-animation: spin360;
+  -moz-animation-duration: 1s;
+  -moz-animation-direction: normal;
+  -moz-animation-iteration-count: infinite;
+  -moz-animation-timing-function: ease-in-out;
+  -webkit-animation: spin360;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-direction: normal;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in-out;
+  animation: spin360;
+  animation-duration: 1s;
+  animation-direction: normal;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
 }
 
 .icon.iconEndpoint {
-  background-color: #2a8ec8;
   width: 16px;
   height: 16px;
   border-radius: 50%;
@@ -454,6 +392,11 @@ body {
 
 .icon.iconEndpoint.end {
   background-color: #28AF7D;
+}
+
+.icon.iconEndpoint.start {
+  border: 2px solid #DDD;
+  background-color: #2a8ec8;
 }
 
 .icon.iconCar {
@@ -506,6 +449,7 @@ body {
 .slideMenu {
   position: absolute;
   height: 0px;
+  overflow: scroll;
   background-color: rgba(0, 0, 0, 0.85);
   z-index: 101;
 }
@@ -592,10 +536,10 @@ body {
   margin-top: -10px;
 }
 
-@-webkit-keyframes path {
+@-moz-keyframes path {
   0%
 {
-    width: 1px;
+    width: 0px;
   }
   100%
 {
@@ -603,10 +547,10 @@ body {
   }
 }
 
-@-moz-keyframes path {
+@-webkit-keyframes path {
   0%
 {
-    width: 1px;
+    width: 0px;
   }
   100%
 {
@@ -617,7 +561,7 @@ body {
 @keyframes path {
   0%
 {
-    width: 1px;
+    width: 0px;
   }
   100%
 {
@@ -625,7 +569,7 @@ body {
   }
 }
 
-@-webkit-keyframes slideDown {
+@-moz-keyframes slideDown {
   0%
 {
     height: 0px;
@@ -636,7 +580,7 @@ body {
   }
 }
 
-@-moz-keyframes slideDown {
+@-webkit-keyframes slideDown {
   0%
 {
     height: 0px;
@@ -655,6 +599,171 @@ body {
   100%
 {
     height: 380px;
+  }
+}
+
+@-moz-keyframes pulse {
+  0%
+{
+    opacity: 1;
+  }
+  100%
+{
+    opacity: 0.6;
+  }
+}
+
+@-webkit-keyframes pulse {
+  0%
+{
+    opacity: 1;
+  }
+  100%
+{
+    opacity: 0.6;
+  }
+}
+
+@keyframes pulse {
+  0%
+{
+    opacity: 1;
+  }
+  100%
+{
+    opacity: 0.6;
+  }
+}
+
+@-moz-keyframes spin360 {
+  0%
+{
+    -moz-transform: rotate(0deg);
+  }
+  100%
+{
+    -moz-transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes spin360 {
+  0%
+{
+    -webkit-transform: rotate(0deg);
+  }
+  100%
+{
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin360 {
+  0%
+{
+    transform: rotate(0deg);
+  }
+  100%
+{
+    transform: rotate(360deg);
+  }
+}
+
+@-moz-keyframes rise {
+  0%
+{
+    height: 0px;
+  }
+  100%
+{
+    height: 100px;
+  }
+}
+
+@-webkit-keyframes rise {
+  0%
+{
+    height: 0px;
+  }
+  100%
+{
+    height: 100px;
+  }
+}
+
+@keyframes rise {
+  0%
+{
+    height: 0px;
+  }
+  100%
+{
+    height: 100px;
+  }
+}
+
+@-moz-keyframes riseAgain {
+  0%
+{
+    height: 100px;
+  }
+  100%
+{
+    height: 130px;
+  }
+}
+
+@-webkit-keyframes riseAgain {
+  0%
+{
+    height: 100px;
+  }
+  100%
+{
+    height: 130px;
+  }
+}
+
+@keyframes riseAgain {
+  0%
+{
+    height: 100px;
+  }
+  100%
+{
+    height: 130px;
+  }
+}
+
+@-moz-keyframes dock {
+  0%
+{
+    height: 0px;
+  }
+  100%
+{
+    height: 30px;
+  }
+}
+
+@-webkit-keyframes dock {
+  0%
+{
+    height: 0px;
+  }
+  100%
+{
+    height: 30px;
+  }
+}
+
+@keyframes dock {
+  0%
+{
+    height: 0px;
+  }
+  100%
+{
+    height: 30px;
   }
 }
 
