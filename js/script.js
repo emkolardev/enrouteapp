@@ -87,7 +87,7 @@ function initMap() {
 
 
 	locArrow.classList.add('finding');
-	geocodeCurrentLatLng(false, false);
+	geocodeCurrentLatLng(false, false, false);
 	
 
 	
@@ -361,8 +361,8 @@ function addTargets(legs) {
 				}
 			}
 		}
-		else {
-			var gap = 1609;
+		else if (distance > 1600) {
+			var gap = 1600;
 			var dist = 0;
 			for (var j = 0; j < legs[i].steps.length; j++) {
 				for (var q = 1; q < legs[i].steps[j].path.length; q++) {
@@ -374,7 +374,25 @@ function addTargets(legs) {
 							lat: lat2,
 							lng: lng2
 						});
-						gap += 1609;
+						gap += 1600;
+					}
+				}
+			}
+		}
+		else {
+			var gap = 500;
+			var dist = 0;
+			for (var j = 0; j < legs[i].steps.length; j++) {
+				for (var q = 1; q < legs[i].steps[j].path.length; q++) {
+					var lat2 = legs[i].steps[j].path[q].lat();
+					var lng2 = legs[i].steps[j].path[q].lng();
+					dist = calcDistance(lat1, lat2, lng1, lng2);
+					if (dist > gap) {
+						targets.push({
+							lat: lat2,
+							lng: lng2
+						});
+						gap += 500;
 					}
 				}
 			}
@@ -384,7 +402,6 @@ function addTargets(legs) {
 
 function findAlongRoute(results, status) {
 	if (status != google.maps.places.PlacesServiceStatus.OK) {
-		document.getElementById('place-input').value = 'Cannot find current location';
 		return;
 	}
 	
