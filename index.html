@@ -23,6 +23,7 @@
 				<span class="icon iconMenu" id="icon-menu"></span>
 			</div>
 		</div>
+		
 		<div class="locationBtn" id="location-btn">
 				<span class="icon iconLocation" id="icon-location"></span>		
 		</div>
@@ -34,15 +35,13 @@
 			<!-- holds waypoint dots/anims -->
 			<div class="twelve columns flexRow waypointBar" id="waypoint-bar"> 
 				<!-- area for starting location icon -->
-				<div class="one columns flexCol endpoint startPoint" id="endpoint"> 	
+				<div class="one columns flexCol endpoint startPoint" id="endpoint"> 
+					<!-- <span class="icon iconEndpoint start" id="start-backdrop"></span> -->	
 					<span class="icon iconEndpoint start" id="waypoint-start"></span>
 				</div> <!-- end start location area -->
 				 <!-- mini map region -->
 				<div class="ten columns flexCol" id="mini-map">	
 					<div class="flexRow dock" id="dock">
-						<div class="pointBucket flexItem">
-							<span class="waypoint"></span>
-						</div>
 					</div>
 				</div> <!-- end mini map region -->
 				<!-- area for ending location icon -->
@@ -56,8 +55,10 @@
 				<div class="two columns flexCol maneuverIcon" id="maneuver-icon">			
 				</div> 				
 				<div class="eight columns flexCol instructionsText" id="instructions">	
+					
 				</div> 
-				<div class="two columns flexCol navBtn" id="nav-btn"> <!-- call to action / prompt button -->
+				<div class="two columns flexCol navBtnWrapper" id="nav-btn-wrapper"> <!-- call to action / prompt button -->
+					<button class="navBtn" id="nav-btn">Get Route</button>
 				</div> <!-- end prompt button -->
 			</div> <!-- end directions bar -->
 			
@@ -68,11 +69,42 @@
 			<ul class="menuOptions flexCol ten columns" id="menu-options">
 				<li class="opt ten columns flexCol" id='go-discover'>Discover</li>
 				<li class="opt ten columns flexCol">Account</li>
-				<li class="opt ten columns flexCol">Add Home</li>
-				<li class="opt ten columns flexCol">Add Work</li>
+				<li class="opt ten columns flexCol"><!--<span class="userLocLinks"><a class="userLocLink" id="user-home" href="#">Home</a><a class="userLocLink" id="user-work" href="#">Work</a><a class="userLocLink" id="user-favorite" href="#">Favorite</a></span>-->My Locations</li>
+				<!--<li class="opt ten columns flexCol">Add Work</li>
 				<li class="opt ten columns flexCol">Add Favorite</li>
 				<li class="opt ten columns flexCol" id="only-open">Only Show Open</li>
+				<li class="opt ten columns flexCol" id="map-mode">Use Night Mode</li>
+				<li class="opt ten columns flexCol" id="search-radius">Search Radius
+					<div class="rangeArea"><span class="rangeLabel" id="range-min">1</span><input class="range" type="range" name="searchradius" min="1" max="10" step="1" value="1"><span class="rangeLabel" id="range-max">10</span></div>
+				</li>-->
+				<li class="opt ten columns">
+					<ul class="mapOptions twelve columns flexCol" id="map-options">
+						<!--<li class="twelve columns flexRow heading"><span class="darkTxt">Map Options</span></li>-->
+						<li class="twelve columns flexRow">
+							<ul class="optionInputs twelve columns flexRow">
+								<li class="optionLabel">Search Range<br />
+									<span class="flexRow">
+										<span class="optionBtn minus" id="radius-minus">&#45;</span>
+										<span class="optionBtn radiusLabel" id="radius-label"><span id="radius-val">2</span></span>
+										<span class="optionBtn plus" id="radius-plus">&#43;</span>
+									</span>
+								</li>
+								<li class="optionLabel">Night Mode<br />
+									<span class="flexRow">
+										<span class="checkbox"></span>
+									</span>
+								</li>
+								<li class="optionLabel">Show Open Only
+									<span class="flexRow">
+										<span class="checkbox"></span>
+									</span>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
 			</ul>
+			
 			<!-- discover pane -->
 			<ul class="discoverOptions flexRow ten columns" id="discover-options">
 				<li class="opt twelve columns flexRow">
