@@ -29,9 +29,9 @@ var search;
 var points;
 var targets;
 var targetBounds;
-var defaultRadius;
 var distanceAway;
 var radiusAway;
+var mapInterval;
 
 //var addedTime;
 
@@ -58,9 +58,8 @@ var radiusAway;
 		east: 0,
 		west: 0	
 	};
-	defaultRadius = '3218';
 	distanceAway = '8045';
-	radiusAway = '1609';
+	radiusAway = '800';
 })();
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -88,6 +87,28 @@ function initMap() {
 
 	locArrow.classList.add('finding');
 	geocodeCurrentLatLng(false, false, false);
+	
+	mapInterval = setInterval(updateCurrentLocation(function(pos) {
+		current.setMap(null);
+		var p = new google.maps.LatLng({lat: pos.latitude, lng: pos.longitude});
+		current = new google.maps.Marker({
+			          position: p,
+			          map: map,
+			          title: 'You',
+			          icon: 'images/current.png'
+		});
+		current.setMap(map);
+        current.addListener('click', function() {
+	        if (!onRoute) {
+				showBar(false);
+				displayPlace({name: 'Current Location', formatted_address: results[0].formatted_address});
+				toggleBtn(false);
+			}
+			else {
+				console.log('waypoint?', place);
+			}
+        });
+	}), 5000);
 	
 
 	
@@ -267,8 +288,15 @@ function addTargets(legs) {
 	var distance = 0;
 	var lat1 = legs[0].steps[0].start_location.lat();
 	var lng1 = legs[0].steps[0].start_location.lng();
+	targets.push({lat: lat1, lng: lng1});
 	for (var i = 0; i < legs.length; i++) {
 		distance += legs[i].distance.value;
+		if (i == legs.length - 1) {
+			targets.push({
+				lat: legs[i].end_location.lat(),
+				lng: legs[i].end_location.lng()
+			});
+		}
 	}
 	for (var i = 0; i < legs.length; i++) {
 		if (distance > 160000) {
@@ -670,6 +698,30 @@ function currentLocation(p) {
 	}
 }
 
+function updateCurrentLocation(p) {
+	var infoWindow = new google.maps.InfoWindow();
+	var currentPlace = {};
+	// try geolocation
+	if (navigator.geolocation) 
+	{
+		navigator.geolocation.getCurrentPosition(function(position) {
+			var pos = {
+				lat: position.coords.latitude,
+				lng: position.coords.longitude
+			};
+			if (p) {
+				p(pos);
+			}
+		}, 
+		function() { handleLocationError(true, infoWindow, map.getCenter()); });
+	} 
+	else 
+	{
+		// browser doesn't support Geolocation
+		handleLocationError(false, infoWindow, map.getCenter());
+	}
+}
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // handle geolocation errors
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -837,7 +889,7 @@ showOpenToggle.addEventListener('click', function() {
 					var request = {
 						location: reqLoc,
 						types: searchTypes,
-						radius: '1069'	
+						radius: radiusAway	
 					};
 					placesService.nearbySearch(request, discoverSearch);
 				});
@@ -1015,6 +1067,7 @@ function geocodeCurrentLatLng(nav, eta, fn) {
 			        });
 			        if (!nav && !eta && !fn) {
 				    	map.setCenter(center);
+				    	map.setZoom(14);
 
 			        }
 					if (nav) {
